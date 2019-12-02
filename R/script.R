@@ -1,43 +1,41 @@
-#' Imports an ESRI shapefile containing a single polygon feature
-#' @param directory The directory where the shapefile is located (without the last trailing slash)
-#' @param shapefile The filename of the shapefile (without extension) to be converted
-#' @return An object of type sp::SpatialPolygonsDataFrame
-#' @import rgdal
-import_shp = function(directory, shapefile)
+#' Wrapper for `sf::st_read()``
+#' @param dsn Data source name such as the directory where the file is located
+#' @param layer Layer name such as the filename of the file to be converted
+#' @return An object of class sf
+#' @import sf
+import_sf = function(dsn, layer, ...)
 {
-  requireNamespace("rgdal", quietly = TRUE)
-  shp = rgdal::readOGR(dsn = path.expand(directory), layer = shapefile)
+  requireNamespace("sf", quietly = TRUE)
+  st_read(dsn, layer, ...)
 }
 
 #' Create grids for polygons supplied as arguments
-#' @param shp The sp::SpatialPolygonsDataFrame object based on which the grid will be created
+#' @param f The sf object based on which the grid will be created
 #' @param cs The cell size of the grid that is to be created. This will be set as the cell width in both x- and y-directions
-#' @import sp
-#' @return An object of class sp::SpatialPolygons which represents the grid as a polygon
-#' @importFrom methods as
-overlay_grid = function(shp, cs)
+#' @import sf
+#' @return An object of class `sfc` with square polygons
+overlay_grid = function(f, cs)
 {
-  requireNamespace("sp", quietly = TRUE)
-  bb = sp::bbox(shp)
-  cell_size = c(cs, cs)
-  cell_offset = bb[,1] + cell_size/2
-  cell_nos = c((bb[1,2] - bb[1,1])/cs, (bb[2,2] - bb[2,1])/cs)
-  grd = sp::SpatialGrid(sp::GridTopology(cell_offset, cell_size, ceiling(cell_nos)), proj4string = sp::CRS(sp::proj4string(shp)))
-  grd_poly = as(grd, "SpatialPolygons")
+  # requireNamespace("sp", quietly = TRUE)
+  # bb = st_bbox(f)
+  # cell_size = c(cs, cs)
+  # cell_offset = bb[,1] + cell_size/2
+  # cell_nos = c((bb['xmax'] - bb['xmin'])/cs, (bb['ymax'] - bb['ymin'])/cs)
+  # grd = sp::SpatialGrid(sp::GridTopology(cell_offset, cell_size, ceiling(cell_nos)), proj4string = sp::CRS(sp::proj4string(shp)))
+  # grd_poly = as(grd, "SpatialPolygons")
+  st_make_grid(f, cellsize = cs)
 }
 
 #' Counts the number of grid cells required to cover the shape polygon
-#' @param grid The grid as an object of class sp::SpatialPolygons
-#' @param f The shapefile as an object of class sp::SpatialPolygonsDataFrame
-#' @import rgeos
-#' @importFrom stats na.omit
+#' @param grid The grid as an object of class sfc
+#' @param f sf object that the grid is based on
+#' @import sf
 #' @return The number of grid cells of grid required to cover the polygon f
 count_cells = function(grid, f)
 {
-  requireNamespace("rgeos", quietly = TRUE)
-  rows_true = na.omit(over(grid,f))
-  num_intersects = dim(rows_true)[1]
-  num_intersects
+  # requireNamespace("rgeos", quietly = TRUE)
+  # rows_true = na.omit(over(grid,f))
+  num_intersects = length(st_intersection(grid, f))
 }
 
 #' Iterates over a loop to generate grids with different cell-sizes, acquire the number of such cells required to cover the polygon and stores them in a matrix
