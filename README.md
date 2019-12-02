@@ -11,7 +11,3 @@ The `fdim` package is used for calculating the fractal dimension of a single pol
 - Plot a log-log scatterplot of the number of cells vs. the reciprocal of cell size
 - Calculate the best-fit line through these points and find its slope
 - Report the slope of this line as the fractal dimension of the polygon
-
-## Background
-
-This package was developed for an assignment in the course "Spatial Data Science with R" (SS '17) by Prof. Dr. Edzer Pebesma at Institute for Geoinformatics, WWU Muenster, Germany.
