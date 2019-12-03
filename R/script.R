@@ -14,7 +14,7 @@ import_sf = function(dsn, layer, ...)
 #' @param cs The cell size of the grid that is to be created. This will be set as the cell width in both x- and y-directions
 #' @import sf
 #' @return An object of class `sfc` with square polygons
-overlay_grid = function(f, cs)
+overlay_grid = function(cs, f)
 {
   # requireNamespace("sp", quietly = TRUE)
   # bb = st_bbox(f)
@@ -37,6 +37,21 @@ count_cells = function(grid, f)
   # rows_true = na.omit(over(grid,f))
   num_intersects = length(st_intersection(grid, f))
 }
+
+bcd = function(dsn, layer, cs = seq(100, 1000, 50), ...)
+{
+  k = import_sf(dsn, layer, ...)
+  grids = lapply(as.list(cs), overlay_grid, k)
+  int_grids = lapply(grids, count_cells, k)
+  
+  
+}
+
+
+
+
+
+
 
 #' Iterates over a loop to generate grids with different cell-sizes, acquire the number of such cells required to cover the polygon and stores them in a matrix
 #' @param directory The directory name with path where the shapefile is located (without the trailing slash)
