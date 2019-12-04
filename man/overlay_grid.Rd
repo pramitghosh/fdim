@@ -4,15 +4,15 @@
 \alias{overlay_grid}
 \title{Create grids for polygons supplied as arguments}
 \usage{
-overlay_grid(shp, cs)
+overlay_grid(cs, f)
 }
 \arguments{
-\item{shp}{The sp::SpatialPolygonsDataFrame object based on which the grid will be created}
-
 \item{cs}{The cell size of the grid that is to be created. This will be set as the cell width in both x- and y-directions}
+
+\item{f}{The sf object based on which the grid will be created}
 }
 \value{
-An object of class sp::SpatialPolygons which represents the grid as a polygon
+An object of class `sfc` with square polygons
 }
 \description{
 Create grids for polygons supplied as arguments
