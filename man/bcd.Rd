@@ -4,7 +4,7 @@
 \alias{bcd}
 \title{Calculates the box-counting dimension of a polygon}
 \usage{
-bcd(dsn, layer, l = seq(100, 1000, 50), plot = FALSE, ...)
+bcd(dsn, layer, l = seq(500, 10000, 1000), plot = FALSE, ...)
 }
 \arguments{
 \item{dsn}{Data source name such as the directory where the file is located}

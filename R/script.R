@@ -44,7 +44,7 @@ count_cells = function(grid, f)
 #' @importFrom stats coef lm
 #' @return A numeric vector of length 1 representing the box-counting dimension of the polygon
 #' @export
-bcd = function(dsn, layer, l = seq(100, 1000, 50), plot = FALSE, ...)
+bcd = function(dsn, layer, l = seq(500, 10000, 1000), plot = FALSE, ...)
 {
   k = import_sf(dsn, layer, ...)
   grids = lapply(as.list(l), overlay_grid, k)
