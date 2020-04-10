@@ -4,9 +4,11 @@
 \alias{bcd}
 \title{Calculates the box-counting dimension of a polygon}
 \usage{
-bcd(dsn, layer, l = seq(500, 10000, 1000), plot = FALSE, ...)
+bcd(x, dsn, layer, l = seq(10000, 1e+05, 10000), plot = FALSE, ...)
 }
 \arguments{
+\item{x}{Object of class `sf`}
+
 \item{dsn}{Data source name such as the directory where the file is located}
 
 \item{layer}{Layer name such as the filename of the file to be converted}
@@ -15,7 +17,7 @@ bcd(dsn, layer, l = seq(500, 10000, 1000), plot = FALSE, ...)
 
 \item{plot}{Logical; if true, a log-log plot of the number of cells used to cover the polygon vs the cell size will be plotted}
 
-\item{...}{Other arguments passed on to `st_read()`}
+\item{...}{Other arguments passed on to `st_read()` together with `dsn` and `layer`}
 }
 \value{
 A numeric vector of length 1 representing the box-counting dimension of the polygon
