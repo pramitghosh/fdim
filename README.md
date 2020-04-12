@@ -1,6 +1,7 @@
 # fdim
 
 ![R-CMD-check](https://github.com/pramitghosh/fdim/workflows/R-CMD-check/badge.svg)
+![pkgdown](https://github.com/pramitghosh/fdim/workflows/pkgdown/badge.svg)
 
 Author: Pramit Ghosh
 
