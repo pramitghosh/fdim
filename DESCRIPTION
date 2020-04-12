@@ -1,21 +1,22 @@
 Package: fdim
+Title: Box-counting Dimension of a Simple Feature Polygon
 Type: Package
-Title: It Calculates The Fractal Dimension Of An ESRI Shapefile
-        Containing a Single Polygon Feature
-Version: 0.1.0
-Authors@R: person("Pramit", "Ghosh", email = "p_ghos02@uni-muenster.de", 
+Description: The package provides an implementation in R to calculate the box-counting dimension
+        of a simple feature with geometry type POLYGON. The box-counting dimension, also known as
+        the Minkowski-Bouligand dimension, estimates the fractal dimension of a set in Euclidean
+        Space. This implementation is meant to calculate this dimension for polygons representing
+        geographic regions.
+Version: 0.2.0
+Authors@R: person("Pramit", "Ghosh", email = "pramitghosh@outlook.com", 
   role = c("aut", "cre"))
-Maintainer: Pramit Ghosh <p_ghos02@uni-muenster.de>
-Description: It mports an ESRI Shapefile containing a polygon and calculates its fractal dimension.
-    It specifically calculates the Minkowski-Bouligand dimension using the Box-Counting algorithm.
-Depends: R (>= 3.4.0)
-License: GPL-3
+Maintainer: Pramit Ghosh <pramitghosh@outlook.com>
+Depends: R (>= 3.6)
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
-Imports: rgdal, sp, stats, methods, rgeos
+RoxygenNote: 7.0.0
+Imports: sf, graphics, stats
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: no
 Packaged: 2017-08-22 14:29:24 UTC; Pramit
-Author: Pramit Ghosh [aut, cre]

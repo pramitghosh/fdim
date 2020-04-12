@@ -7,9 +7,9 @@
 count_cells(grid, f)
 }
 \arguments{
-\item{grid}{The grid as an object of class sp::SpatialPolygons}
+\item{grid}{The grid as an object of class sfc}
 
-\item{f}{The shapefile as an object of class sp::SpatialPolygonsDataFrame}
+\item{f}{sf object that the grid is based on}
 }
 \value{
 The number of grid cells of grid required to cover the polygon f
