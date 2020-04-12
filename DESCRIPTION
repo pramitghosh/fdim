@@ -20,3 +20,5 @@ Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: no
 Packaged: 2017-08-22 14:29:24 UTC; Pramit
+URL: https://github.com/pramitghosh/fdim
+BugReports: https://github.com/pramitghosh/fdim/issues
