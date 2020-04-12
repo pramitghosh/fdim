@@ -1,4 +1,4 @@
-# `fdim`
+# fdim
 
 Author: Pramit Ghosh
 
