@@ -55,7 +55,7 @@ count_cells = function(grid, f)
 #' @importFrom sf st_transform
 #' @return A numeric vector of length 1 representing the box-counting dimension of the polygon
 #' @export
-bcd = function(x, dsn, layer, l = seq(10000, 100000, 10000), plot = FALSE, ...)
+bcd = function(x = NULL, dsn, layer, l = seq(10000, 100000, 10000), plot = FALSE, ...)
 {
   k = if(is.null(x))
     import_sf(dsn, layer, ...) else

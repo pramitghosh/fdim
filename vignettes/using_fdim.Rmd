@@ -1,0 +1,64 @@
+---
+title: "Using fdim"
+author: "Pramit Ghosh"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using fdim}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Overview
+
+This vignette aims at providing an overview of how the calculation of the fractal dimension using the box-counting technique is carried out and then proceeds to give an example.
+
+## Calculating the Box-Counting Dimension
+
+The fdim package is used for calculating the fractal dimension of a simple feature of geometry type `POLYGON` using the box-counting technique. It is done by performing the following important steps:
+
+- Importing a simple feature as an object of class `sf`.
+- If the imported simple feature has spherical coordinates (S^2), it is projected conformally using the Mercator projection (EPSG:3857) so that it is referenced using Cartesian coordinate reference system (R^2).
+- A grid of varying grid sizes in the same CRS as the simple feature is overlayed on the feature. The default sequence of cell cizes are 
+```{r}
+seq(10000, 100000, 10000)
+```
+
+- The number of cells intersecting the feature is counted for grids of each cell size and recorded against the inverse of the cell size.
+- The count of the number of boxes (log-transformed) is plotted against the reciprocal of the cell-size (log-transformed).
+- A linear regression is performed to find the best-fit line for this log-log scatterplot.
+- The slope of the best-fit line gives the box-counting dimension for the feature.
+
+## Example
+
+```{r}
+library('fdim')
+```
+
+`fdim` allows the import of a simple feature in two ways.
+
+- If the feature is stored in an external file, it may be imported using the `dsn` and `layer` arguments in the function `bcd()` along with any other arguments for `sf::st_read()`. The `plot = TRUE` argument plots the scatterplot and the shows the best-fit line obtained from the simple linear regression. The default argument for `plot` is `FALSE`.
+
+```{r fig.height=5, fig.width=7}
+bcd(dsn = system.file(package = "fdim"), layer = "madhya_pradesh", plot = TRUE)
+```
+
+- Alternatively, if the simple feature is already available to the user in the envrionment, it can be passed on to `bcd()` as the the argument `x`. The sequence of cell-sizes to be tested can be optionally modified by explicitly passing the argument `l` to `bcd()`.
+
+```{r fig.height=5, fig.width=7}
+library(rnaturalearth)
+deutschland = ne_countries(scale = "medium", country = "Germany", returnclass = "sf")
+bcd(deutschland, l = seq(10000, 100000, 15000), plot = TRUE)
+```
+
+
+
+
+
