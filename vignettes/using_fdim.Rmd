@@ -53,7 +53,7 @@ bcd(dsn = system.file(package = "fdim"), layer = "madhya_pradesh", plot = TRUE)
 - Alternatively, if the simple feature is already available to the user in the envrionment, it can be passed on to `bcd()` as the the argument `x`. The sequence of cell-sizes to be tested can be optionally modified by explicitly passing the argument `l` to `bcd()`.
 
 ```{r fig.height=5, fig.width=7}
-library(rnaturalearth)
+library('rnaturalearth')
 deutschland = ne_countries(scale = "medium", country = "Germany", returnclass = "sf")
 bcd(deutschland, l = seq(10000, 100000, 15000), plot = TRUE)
 ```
