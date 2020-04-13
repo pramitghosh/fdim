@@ -1,4 +1,4 @@
-context("Projections")
+context("Projections\n")
 library('fdim')
 library('sf')
 

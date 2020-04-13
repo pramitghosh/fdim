@@ -1,4 +1,4 @@
-context("Classes of objects returned by functions")
+context("Classes of objects returned by functions\n")
 library('fdim')
 
 test_that(desc = "Importing sf",
