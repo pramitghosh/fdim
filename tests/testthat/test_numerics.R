@@ -12,6 +12,6 @@ test_that(desc = "Cell counts",
 
 test_that(desc = "Box-Counting Dimension",
             {
-              expect_less_than(abs(bcd(dsn = system.file(package = "fdim"), layer = "madhya_pradesh") - 1.834641), 1/1000000)
+              expect_lt(abs(bcd(dsn = system.file(package = "fdim"), layer = "madhya_pradesh") - 1.834641), 1/1000000)
             }
           )
