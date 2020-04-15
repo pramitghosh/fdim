@@ -100,6 +100,7 @@ The generated Sierpiński triangle is converted to a `sf` `MULTIPOINT` object wi
 plot(sierpinski_sf, axes = TRUE)
 
 ```
+
 The Box-Counting Dimension of this figure is calculated using `bcd()` as illustrated below.
 ```{r fig.height=5, fig.width=7}
 bcd(sierpinski_sf, l = seq(0.01, 0.1, 0.01), plot = TRUE)
