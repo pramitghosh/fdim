@@ -8,7 +8,7 @@ Author: Pramit Ghosh
 
 ## Description
 
-The package provides an implementation in R to calculate the box-counting dimension of a simple feature with geometry type POLYGON. The box-counting dimension, also known as the Minkowski-Bouligand dimension, estimates the fractal dimension of a set in Euclidean Space.
+The package provides an implementation in R to calculate the box-counting dimension of a geographic feature, represented in accordance with the [Simple Features](https://en.wikipedia.org/wiki/Simple_Features) (officially *Simple Features Access*) specifications, as endorsed by [OGC](https://www.ogc.org/projects/groups/sfswg) and [ISO](https://www.iso.org/standard/40114.html). The box-counting dimension, also known as the Minkowski-Bouligand dimension, estimates the fractal dimension of a set in Euclidean Space.
 
 ## Installation
 
