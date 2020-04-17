@@ -16,11 +16,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Overview
+# Overview
 
 This vignette aims at providing an overview of how the calculation of the fractal dimension using the box-counting technique is carried out and then proceeds to give an example.
 
-## Calculating the Box-Counting Dimension
+# Calculating the Box-Counting Dimension
 
 The fdim package is used for calculating the fractal dimension of a simple feature of geometry type `POLYGON` using the box-counting technique. It is done by performing the following important steps:
 
@@ -36,7 +36,7 @@ seq(10000, 100000, 10000)
 - A linear regression is performed to find the best-fit line for this log-log scatterplot.
 - The slope of the best-fit line gives the box-counting dimension for the feature.
 
-## Example
+# Example
 
 ```{r}
 library('fdim')
@@ -58,7 +58,50 @@ deutschland = ne_countries(scale = "medium", country = "Germany", returnclass = 
 bcd(deutschland, l = seq(10000, 100000, 15000), plot = TRUE)
 ```
 
+## Internal working
 
+When the above code is executed, `deutschland` stores a `sf` polygon representing Germany. When `bcd()` is called it creates `sf` objects in the form of grids (comprising of polygons) covering `deutschland`. Additionally, since the CRS of `deutschland` is in latitude and longitude, it transforms it to EPSG:3857.
 
+```{r}
+library(sf)
+deutschland = st_transform(deutschland, 3857)
+```
 
+The number of grids created is the length of the vector `l` that is passed to `bcd()`. Each grid is made up of square polygons with side-lengths `l`. The following figures show square grids overlayed on top of `deutschland` with side-lengths 40000m and 70000m, as an illustraion.
 
+```{r fig.height=5, fig.width=7}
+par(mfrow=c(1,2))
+
+plot(st_geometry(deutschland), col = "wheat", axes = TRUE, main = "Cell size = 40000m", xlab = "Easting (m)", ylab = "Northing (m)")
+plot(st_make_grid(deutschland, cellsize = 40000), add = TRUE)
+
+plot(st_geometry(deutschland), col = "wheat", axes = TRUE, main = "Cell size = 70000m", xlab = "Easting (m)", ylab = "Northing (m)")
+plot(st_make_grid(deutschland, cellsize = 70000), add = TRUE)
+
+par(mfrow = c(1,1))
+```
+
+The number of cells intersecting with `deutschland`, say $N$, is counted for each grid with cells having side-length $l$. A simple linear regression is performed with $log(N)$ being the dependent variable and $-log(\frac{1}{l})$. The coefficient of the dependent variable i.e., the slope of the best-fit line gives the Box-Counting Dimension.
+
+In the above example, the number of intersecting cells for cell sizes 40000m and 70000m are
+```{r}
+# For cell size = 40000m
+(n1 = length(st_intersection(st_geometry(deutschland), st_make_grid(deutschland, cellsize = 40000))))
+# For cell size = 70000m
+(n2 = length(st_intersection(st_geometry(deutschland), st_make_grid(deutschland, cellsize = 70000))))
+```
+respectively. Thus, the dependent variable $N$ would be
+```{r}
+(y = log(c(n1, n2)))
+```
+while the independent variable $-log(\frac{1}{l})$ would be
+```{r}
+(x = -log(c(1/40000, 1/70000)))
+```
+
+The slope of the best-fit line in this case will be the slope of the line joining the points and is equal to
+```{r}
+-(y[2] - y[1])/(x[2] - x[1])
+```
+
+This is very close to the slope calculated using `bcd()` earlier in this document.
