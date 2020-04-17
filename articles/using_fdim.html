@@ -85,7 +85,7 @@
       <h1 data-toc-skip>Using fdim</h1>
                         <h4 class="author">Pramit Ghosh</h4>
             
-            <h4 class="date">2020-04-16</h4>
+            <h4 class="date">2020-04-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/pramitghosh/fdim/blob/master/vignettes/using_fdim.Rmd"><code>vignettes/using_fdim.Rmd</code></a></small>
       <div class="hidden name"><code>using_fdim.Rmd</code></div>
@@ -94,18 +94,18 @@
 
     
     
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<div id="overview" class="section level1">
+<h1 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h1>
 <p>This vignette aims at providing an overview of how the calculation of the fractal dimension using the box-counting technique is carried out and then proceeds to give an example.</p>
 </div>
-<div id="calculating-the-box-counting-dimension" class="section level2">
-<h2 class="hasAnchor">
-<a href="#calculating-the-box-counting-dimension" class="anchor"></a>Calculating the Box-Counting Dimension</h2>
+<div id="calculating-the-box-counting-dimension" class="section level1">
+<h1 class="hasAnchor">
+<a href="#calculating-the-box-counting-dimension" class="anchor"></a>Calculating the Box-Counting Dimension</h1>
 <p>The fdim package is used for calculating the fractal dimension of a simple feature of geometry type <code>POLYGON</code> using the box-counting technique. It is done by performing the following important steps:</p>
 <ul>
 <li>Importing a simple feature as an object of class <code>sf</code>.</li>
-<li>If the imported simple feature has spherical coordinates (S^2), it is projected conformally using the Mercator projection (EPSG:3857) so that it is referenced using Cartesian coordinate reference system (R^2).</li>
+<li>If the imported simple feature has spherical coordinates (<span class="math inline">\(\mathbb{S}^2\)</span>), it is projected conformally using the Mercator projection (EPSG:3857) so that it is referenced using Cartesian coordinate reference system (<span class="math inline">\(\mathbb{R}^2\)</span>).</li>
 <li>A grid of varying grid sizes in the same CRS as the simple feature is overlayed on the feature. The default sequence of cell cizes are</li>
 </ul>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">10000</span>, <span class="fl">100000</span>, <span class="fl">10000</span>)
@@ -117,9 +117,9 @@
 <li>The slope of the best-fit line gives the box-counting dimension for the feature.</li>
 </ul>
 </div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
+<div id="example" class="section level1">
+<h1 class="hasAnchor">
+<a href="#example" class="anchor"></a>Example</h1>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">'fdim'</span>)</pre></body></html></div>
 <p><code>fdim</code> allows the import of a simple feature in two ways.</p>
 <ul>
@@ -155,6 +155,43 @@
 <pre><code>#&gt; Performing simple linear regression to determine Box-Counting dimension...
 #&gt; Plotting best-fit line...
 #&gt; [1] 1.893884</code></pre>
+<div id="internal-working" class="section level2">
+<h2 class="hasAnchor">
+<a href="#internal-working" class="anchor"></a>Internal working</h2>
+<p>When the above code is executed, <code>deutschland</code> stores a <code>sf</code> polygon representing Germany. When <code><a href="../reference/bcd.html">bcd()</a></code> is called it creates <code>sf</code> objects in the form of grids (comprising of polygons) covering <code>deutschland</code>. Additionally, since the CRS of <code>deutschland</code> is in latitude and longitude, it transforms it to EPSG:3857.</p>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">sf</span>)
+<span class="co">#&gt; Linking to GEOS 3.8.1, GDAL 2.4.4, PROJ 7.0.0</span>
+<span class="no">deutschland</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_transform.html">st_transform</a></span>(<span class="no">deutschland</span>, <span class="fl">3857</span>)</pre></body></html></div>
+<p>The number of grids created is the length of the vector <code>l</code> that is passed to <code><a href="../reference/bcd.html">bcd()</a></code>. Each grid is made up of square polygons with side-lengths <code>l</code>. The following figures show square grids overlayed on top of <code>deutschland</code> with side-lengths 40000m and 70000m, as an illustraion.</p>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mfrow</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">2</span>))
+
+<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="no">deutschland</span>), <span class="kw">col</span> <span class="kw">=</span> <span class="st">"wheat"</span>, <span class="kw">axes</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Cell size = 40000m"</span>, <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"Easting (m)"</span>, <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">"Northing (m)"</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_make_grid.html">st_make_grid</a></span>(<span class="no">deutschland</span>, <span class="kw">cellsize</span> <span class="kw">=</span> <span class="fl">40000</span>), <span class="kw">add</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+
+<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="no">deutschland</span>), <span class="kw">col</span> <span class="kw">=</span> <span class="st">"wheat"</span>, <span class="kw">axes</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Cell size = 70000m"</span>, <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"Easting (m)"</span>, <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">"Northing (m)"</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_make_grid.html">st_make_grid</a></span>(<span class="no">deutschland</span>, <span class="kw">cellsize</span> <span class="kw">=</span> <span class="fl">70000</span>), <span class="kw">add</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
+<p><img src="using_fdim_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
+<div class="sourceCode" id="cb9"><html><body><pre class="r">
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="kw">mfrow</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">1</span>))</pre></body></html></div>
+<p>The number of cells intersecting with <code>deutschland</code>, say <span class="math inline">\(N\)</span>, is counted for each grid with cells having side-length <span class="math inline">\(l\)</span>. A simple linear regression is performed with <span class="math inline">\(log(N)\)</span> being the dependent variable and <span class="math inline">\(-log(\frac{1}{l})\)</span>. The coefficient of the dependent variable i.e., the slope of the best-fit line gives the Box-Counting Dimension.</p>
+<p>In the above example, the number of intersecting cells for cell sizes 40000m and 70000m are</p>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="co"># For cell size = 40000m</span>
+(<span class="no">n1</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/geos_binary_ops.html">st_intersection</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="no">deutschland</span>), <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_make_grid.html">st_make_grid</a></span>(<span class="no">deutschland</span>, <span class="kw">cellsize</span> <span class="kw">=</span> <span class="fl">40000</span>))))
+<span class="co">#&gt; [1] 652</span>
+<span class="co"># For cell size = 70000m</span>
+(<span class="no">n2</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/geos_binary_ops.html">st_intersection</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="no">deutschland</span>), <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_make_grid.html">st_make_grid</a></span>(<span class="no">deutschland</span>, <span class="kw">cellsize</span> <span class="kw">=</span> <span class="fl">70000</span>))))
+<span class="co">#&gt; [1] 233</span></pre></body></html></div>
+<p>respectively. Thus, the dependent variable <span class="math inline">\(N\)</span> would be</p>
+<div class="sourceCode" id="cb11"><html><body><pre class="r">(<span class="no">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">n1</span>, <span class="no">n2</span>)))
+<span class="co">#&gt; [1] 6.480045 5.451038</span></pre></body></html></div>
+<p>while the independent variable <span class="math inline">\(-log(\frac{1}{l})\)</span> would be</p>
+<div class="sourceCode" id="cb12"><html><body><pre class="r">(<span class="no">x</span> <span class="kw">=</span> -<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>/<span class="fl">40000</span>, <span class="fl">1</span>/<span class="fl">70000</span>)))
+<span class="co">#&gt; [1] 10.59663 11.15625</span></pre></body></html></div>
+<p>The slope of the best-fit line in this case will be the slope of the line joining the points and is equal to</p>
+<div class="sourceCode" id="cb13"><html><body><pre class="r">-(<span class="no">y</span>[<span class="fl">2</span>] - <span class="no">y</span>[<span class="fl">1</span>])/(<span class="no">x</span>[<span class="fl">2</span>] - <span class="no">x</span>[<span class="fl">1</span>])
+<span class="co">#&gt; [1] 1.838772</span></pre></body></html></div>
+<p>This is very close to the slope calculated using <code><a href="../reference/bcd.html">bcd()</a></code> earlier in this document.</p>
+</div>
 </div>
   </div>
 
