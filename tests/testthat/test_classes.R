@@ -1,14 +1,14 @@
 context("Classes of objects returned by functions\n")
-library('fdim')
+library('sameSVD')
 
 test_that(desc = "Importing sf",
             {
-              expect_is(fdim:::import_sf(dsn = system.file(package = "fdim"), layer = "madhya_pradesh"), "sf")
+              expect_is(sameSVD:::import_sf(dsn = system.file(package = "sameSVD"), layer = "madhya_pradesh"), "sf")
             }
           )
 
 test_that(desc = "Overlaying grid",
             {
-              expect_is(fdim:::overlay_grid(cs = 100000, f = fdim:::import_sf(dsn = system.file(package = "fdim"), layer = "madhya_pradesh")), "sfc_POLYGON")
+              expect_is(sameSVD:::overlay_grid(cs = 100000, f = sameSVD:::import_sf(dsn = system.file(package = "sameSVD"), layer = "madhya_pradesh")), "sfc_POLYGON")
             }
           )

@@ -1,4 +1,4 @@
 library(testthat)
-library(fdim)
+library(sameSVD)
 
-test_check("fdim")
+test_check("sameSVD")

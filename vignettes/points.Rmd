@@ -29,7 +29,7 @@ In the following examples, the Box-Counting Dimension will be calculated for bot
 ```{r}
 # Loading pre-requisite packages
 library(sf)
-library(fdim)
+library(sameSVD)
 ```
 
 ## Features with known Box-Counting dimensions

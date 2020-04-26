@@ -1,6 +1,6 @@
 context("Plots\n")
 library(rnaturalearth)
-library(fdim)
+library(sameSVD)
 
 deutschland = ne_countries(scale = "medium", country = "Germany", returnclass = "sf")
 

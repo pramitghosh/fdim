@@ -1,10 +1,10 @@
 ---
-title: "Using fdim"
+title: "Using sameSVD"
 author: "Pramit Ghosh"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using fdim}
+  %\VignetteIndexEntry{Using sameSVD}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -39,7 +39,7 @@ seq(10000, 100000, 10000)
 # Example
 
 ```{r}
-library('fdim')
+library('sameSVD')
 ```
 
 `fdim` allows the import of a simple feature in two ways.
@@ -47,7 +47,7 @@ library('fdim')
 - If the feature is stored in an external file, it may be imported using the `dsn` and `layer` arguments in the function `bcd()` along with any other arguments for `sf::st_read()`. The `plot = TRUE` argument plots the scatterplot and the shows the best-fit line obtained from the simple linear regression. The default argument for `plot` is `FALSE`.
 
 ```{r fig.height=5, fig.width=7}
-bcd(dsn = system.file(package = "fdim"), layer = "madhya_pradesh", plot = TRUE)
+bcd(dsn = system.file(package = "sameSVD"), layer = "madhya_pradesh", plot = TRUE)
 ```
 
 - Alternatively, if the simple feature is already available to the user in the envrionment, it can be passed on to `bcd()` as the the argument `x`. The sequence of cell-sizes to be tested can be optionally modified by explicitly passing the argument `l` to `bcd()`.
