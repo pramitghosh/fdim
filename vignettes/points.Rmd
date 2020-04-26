@@ -1,0 +1,108 @@
+---
+title: "Box-Counting dimension of point datasets"
+author: "Pramit Ghosh"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Box-Counting dimension of point datasets}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Overview
+
+This vignette illustrates the use of this package for calculating the Box-Counting Dimension of point features such as those `sf` objects with geometry type `MULTIPOINT`.
+
+> For `sf` objects with geometry type `POINT`, a Box-Counting dimension cannot be calculated and is (trivially) equal to 0.
+
+# Examples
+
+In the following examples, the Box-Counting Dimension will be calculated for both arbitrary `MULTIPOINT` features with theoretically known fractal dimensions as well as for real-world datasets.
+
+```{r}
+# Loading pre-requisite packages
+library(sf)
+library(sameSVD)
+```
+
+## Features with known Box-Counting dimensions
+
+### `MULTIPOINT` feature with 2 points
+
+```{r}
+two_points = st_sf(st_sfc(c(st_point(c(1, 2)), st_point(c(3, 4))), crs = 3857))
+two_points
+```
+`two_points` has the following class memberships
+```{r}
+class(two_points)
+```
+
+```{r fig.height=5, fig.width=7}
+plot(st_geometry(two_points), axes = TRUE)
+```
+
+The Box-Counting dimension of this simple feature can be calculated as follows
+```{r fig.height=5, fig.width=7}
+bcd(two_points, l = seq(0.1, 1, 0.1), plot = TRUE)
+```
+The linear regression gives a perfectly horizontal best-fit line indicating a Box-Counting dimension of 0, as expected.
+
+### Sierpiński triangle
+
+The [Sierpiński triangle](https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle) is an extensively studied fractal with a theoretically known fractal (Hausdorff) dimension of $log_2(3) = 1.5850$. In this example, a Sierpiński triangle will be generated using a randomized algorithm and its Box-Counting Dimension will be calculated. The following figure shows how the randomized algorithm works and creates the said fractal using discrete points.
+
+
+<p align = "center"><a href="https://commons.wikimedia.org/wiki/File:Tri%C3%A2ngulo_de_Sierpinski.gif#/media/File:Triângulo_de_Sierpinski.gif"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Tri%C3%A2ngulo_de_Sierpinski.gif" alt="Triângulo de Sierpinski.gif"></a><br>By <a href="//commons.wikimedia.org/wiki/User:Ederporto" title="User:Ederporto">Ederporto</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=55331819">Link</a></p>
+
+
+```{r}
+# Methods to generate a Sierpiński triange
+new_points = function(points, last_point, last_vertex = NA)
+{
+  pt_row = sample(1:dim(points)[1], 1)
+  if(!is.na(last_vertex))
+  {
+    while(pt_row == last_vertex)
+      pt_row = sample(1:dim(points)[1], 1)
+  }
+  mid_pt = c((last_point[1] + points[pt_row, 1])/2, (last_point[2] + points[pt_row, 2])/2)
+  list(matrix(mid_pt, nrow = 1), pt_row)
+}
+```
+The Sierpiński triangle is generated as follows.
+```{r}
+# Define initial variables
+n = 3 #Create a 3-sided polygon (triangle)
+points = matrix(data = c(c(0,0), c(1,0), c(cos(pi/3), sin(pi/3))), ncol = 2, byrow = TRUE, dimnames = list(LETTERS[1:n], c("x", "y"))) #Define vertices of triangle
+last_pt = matrix(data = c(0,0), nrow = 1) #Choose a random starting point
+max_pts = 20000
+
+# Generate coordinates
+sierpinski = list()
+length(sierpinski) = max_pts
+for(i in 1:max_pts){
+  last_pt = new_points(points, last_pt)[[1]]
+  sierpinski[[i]] = last_pt
+}
+sierpinski_pts = matrix(unlist(sierpinski), ncol = 2, byrow = TRUE)
+```
+The generated Sierpiński triangle is converted to a `sf` `MULTIPOINT` object with a CRS EPSG:3857.
+```{r fig.height=5, fig.width=7}
+(sierpinski_sf = st_sf(st_sfc(st_multipoint(sierpinski_pts), crs = 3857)))
+plot(sierpinski_sf, axes = TRUE)
+
+```
+
+The Box-Counting Dimension of this figure is calculated using `bcd()` as illustrated below.
+```{r fig.height=5, fig.width=7}
+bcd(sierpinski_sf, l = seq(0.01, 0.1, 0.01), plot = TRUE)
+```
+The regression gives a Box-Counting dimension of ~1.59 which is very close to the theoretical value.

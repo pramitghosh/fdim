@@ -4,7 +4,7 @@
 \alias{bcd}
 \title{Calculates the box-counting dimension of a polygon}
 \usage{
-bcd(x, dsn, layer, l = seq(10000, 1e+05, 10000), plot = FALSE, ...)
+bcd(x = NULL, dsn, layer, l = seq(10000, 1e+05, 10000), plot = FALSE, ...)
 }
 \arguments{
 \item{x}{Object of class `sf`}

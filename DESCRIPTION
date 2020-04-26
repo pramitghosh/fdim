@@ -1,11 +1,7 @@
-Package: fdim
-Title: Box-counting Dimension of a Simple Feature Polygon
+Package: sameSVD
+Title: Box-Counting Dimension of a Simple Feature Polygon
 Type: Package
-Description: The package provides an implementation in R to calculate the box-counting dimension
-        of a simple feature with geometry type POLYGON. The box-counting dimension, also known as
-        the Minkowski-Bouligand dimension, estimates the fractal dimension of a set in Euclidean
-        Space. This implementation is meant to calculate this dimension for polygons representing
-        geographic regions.
+Description: Provides an implementation in R to calculate measures of (self-)similarity and (self-)affinity of spatial vector data.
 Version: 0.2.0
 Authors@R: person("Pramit", "Ghosh", email = "pramitghosh@outlook.com", 
   role = c("aut", "cre"))
@@ -15,8 +11,19 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.0.0
-Imports: sf, graphics, stats
-Suggests: knitr, rmarkdown
-VignetteBuilder: knitr
+Imports: 
+    sf,
+    graphics,
+    stats
+Suggests: 
+    knitr,
+    rmarkdown,
+    rnaturalearth,
+    rnaturalearthdata,
+    rgeos,
+    testthat
 NeedsCompilation: no
+VignetteBuilder: knitr
 Packaged: 2017-08-22 14:29:24 UTC; Pramit
+URL: https://github.com/pramitghosh/sameSVD
+BugReports: https://github.com/pramitghosh/sameSVD/issues
