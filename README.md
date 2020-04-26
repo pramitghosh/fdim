@@ -51,4 +51,4 @@ deutschland = ne_countries(scale = "medium", country = "Germany", returnclass = 
 bcd(deutschland, plot = TRUE)
 ```
 
-A more detailed illustration along with the internal working can be found in the [vignettes](https://pramitghosh.github.io/fdim/articles/using_fdim.html).
+A more detailed illustration along with the internal working can be found in the [vignettes](https://pramitghosh.github.io/sameSVD/articles/using_fdim.html).
