@@ -1,4 +1,4 @@
-# fdim
+# sameSVD
 
 ![R-CMD-check](https://github.com/pramitghosh/fdim/workflows/R-CMD-check/badge.svg) 
 ![pkgdown](https://github.com/pramitghosh/fdim/workflows/pkgdown/badge.svg) 
@@ -8,7 +8,19 @@ Author: Pramit Ghosh
 
 ## Description
 
-The package provides an implementation in R to calculate the box-counting dimension of a geographic feature, represented in accordance with the [Simple Features](https://en.wikipedia.org/wiki/Simple_Features) (officially *Simple Features Access*) specifications, as endorsed by [OGC](https://www.ogc.org/projects/groups/sfswg) and [ISO](https://www.iso.org/standard/40114.html). The box-counting dimension, also known as the Minkowski-Bouligand dimension, estimates the fractal dimension of a set in Euclidean Space.
+**sameSVD** stands for **S**imilarity and **A**ffinity **Me**asures for **S**patial **V**ector **D**ata
+
+> This package is still under development and many of the objectives of this package are yet to be implemented.
+
+The objective of this package is to establish (if required) and implement measures of (self-)similarity and (self-)affinity for spatial vector data represented in accordance with the [Simple Features](https://en.wikipedia.org/wiki/Simple_Features) (officially *Simple Features Access*) specifications, as endorsed by [OGC](https://www.ogc.org/projects/groups/sfswg) and [ISO](https://www.iso.org/standard/40114.html).
+
+### Present Status
+
+|  | Similarity | Affinity |
+|--------|-----------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Self | - `*POINT` [done]<br>- `*LINESTRING` [done]<br>- `*POLYGON` [done] | - `*POINT` [not implemented yet]<br>- `*LINESTRING` [not implemented yet]<br>- `*POLYGON` [not implemented yet]<br><br>*to be implemented using box-counting dimension* |
+| Others | - `*POINT` [need suitable algorithm]<br>- `*LINESTRING` [turning angles]<br>- `*POLYGON` [turning angles] | - `*POINT` [?]<br>- `*LINESTRING` [?]<br>- `*POLYGON` [?]<br><br>*need suitable algorithms to implement* |
+
 
 ## Installation
 
@@ -17,8 +29,6 @@ The package provides an implementation in R to calculate the box-counting dimens
 In order to install this package, the following packages are required as a pre-requisite.
 
 - `sf`
-- `graphics`
-- `stats`
 
 In addition, the following packages are also suggested. These are mostly required to knit the vignettes and run certain tests.
 
@@ -29,7 +39,7 @@ In addition, the following packages are also suggested. These are mostly require
 These can be installed by running the following command in R:
 
 ```r
-install.packages(c("sf", "graphics", "stats", "rnaturalearth", "rnaturalearthdata", "rgeos"))
+install.packages(c("sf", "rnaturalearth", "rnaturalearthdata", "rgeos"))
 ```
 ## Usage
 
