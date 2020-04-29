@@ -12,7 +12,7 @@ Author: Pramit Ghosh
 
 > This package is still under development and many of the objectives of this package are yet to be implemented or conceptualized.
 
-The objective of this package is to establish (if required) and implement measures of (self-)similarity and (self-)affinity for spatial vector data represented in accordance with the [Simple Features](https://en.wikipedia.org/wiki/Simple_Features) (officially *Simple Features Access*) specifications, as endorsed by [OGC](https://www.ogc.org/projects/groups/sfswg) and [ISO](https://www.iso.org/standard/40114.html).
+The objective of this package is to establish (if required) and implement measures of (self-)similarity and (self-)affinity for spatial vector data represented in accordance with the [Simple Features](https://en.wikipedia.org/wiki/Simple_Features) (officially *Simple Features Access*) specifications, as standardized by [OGC](https://www.ogc.org/projects/groups/sfswg) and [ISO](https://www.iso.org/standard/40114.html).
 
 ### Present Status
 
