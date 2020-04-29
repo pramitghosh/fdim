@@ -85,7 +85,7 @@
       <h1 data-toc-skip>Box-Counting dimension of point datasets</h1>
                         <h4 class="author">Pramit Ghosh</h4>
             
-            <h4 class="date">2020-04-26</h4>
+            <h4 class="date">2020-04-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/pramitghosh/sameSVD/blob/master/vignettes/points.Rmd"><code>vignettes/points.Rmd</code></a></small>
       <div class="hidden name"><code>points.Rmd</code></div>
@@ -180,10 +180,10 @@
 <span class="co">#&gt; Simple feature collection with 1 feature and 0 fields</span>
 <span class="co">#&gt; geometry type:  MULTIPOINT</span>
 <span class="co">#&gt; dimension:      XY</span>
-<span class="co">#&gt; bbox:           xmin: 0 ymin: 0 xmax: 0.9992817 ymax: 0.8647961</span>
+<span class="co">#&gt; bbox:           xmin: 0.001107893 ymin: 0 xmax: 0.9994851 ymax: 0.8653542</span>
 <span class="co">#&gt; CRS:            EPSG:3857</span>
 <span class="co">#&gt;   st_sfc.st_multipoint.sierpinski_pts...crs...3857.</span>
-<span class="co">#&gt; 1                    MULTIPOINT ((0 0), (0.25 0....</span>
+<span class="co">#&gt; 1                    MULTIPOINT ((0.5 0), (0.75 ...</span>
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="no">sierpinski_sf</span>, <span class="kw">axes</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
 <p><img src="points_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
 <p>The Box-Counting Dimension of this figure is calculated using <code><a href="../reference/bcd.html">bcd()</a></code> as illustrated below.</p>
@@ -194,7 +194,7 @@
 <p><img src="points_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
 <pre><code>#&gt; Performing simple linear regression to determine Box-Counting dimension...
 #&gt; Plotting best-fit line...
-#&gt; [1] 1.597544</code></pre>
+#&gt; [1] 1.599142</code></pre>
 <p>The regression gives a Box-Counting dimension of ~1.59 which is very close to the theoretical value.</p>
 </div>
 </div>
