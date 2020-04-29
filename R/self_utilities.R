@@ -41,30 +41,8 @@ count_cells = function(grid, f)
   num_intersects = length(st_intersection(grid, f))
 }
 
-
-#' Calculates the box-counting dimension of a polygon
-#'
-#' @param x Object of class `sf`
-#' @param dsn Data source name such as the directory where the file is located
-#' @param layer Layer name such as the filename of the file to be converted
-#' @param l Numeric sequence of different cell sizes that will be used to generate the grid. The cell size represents the length of a side of a single square box of the grid
-#' @param plot Logical; if true, a log-log plot of the number of cells used to cover the polygon vs the cell size will be plotted
-#' @param ... Other arguments passed on to `st_read()` together with `dsn` and `layer`
-#' @importFrom graphics abline
-#' @importFrom stats coef lm
-#' @importFrom sf st_transform
-#' @return A numeric vector of length 1 representing the box-counting dimension of the polygon
-#' @export
-bcd = function(x = NULL, dsn, layer, l = seq(10000, 100000, 10000), plot = FALSE, ...)
+generate_matrix = function(l, k)
 {
-  k = if(is.null(x))
-    import_sf(dsn, layer, ...) else
-  if(st_is_longlat(x))
-  {
-    cat("Note: Coordinates in Lat/Long; reprojecting to EPSG:3857...\n")
-    st_transform(x, 3857)
-  } else x
-  
   cat("Generating grids...\n")
   grids = lapply(as.list(l), overlay_grid, k)
   
@@ -72,20 +50,55 @@ bcd = function(x = NULL, dsn, layer, l = seq(10000, 100000, 10000), plot = FALSE
   int_grids = lapply(grids, count_cells, k)
   
   bcd_matrix = log(cbind(1/l, as.numeric(int_grids)))
-  if(plot)
-  {
-    cat("Plotting requested...\n")
-    plot(bcd_matrix, ylab = "log(Number of boxes needed to cover)", xlab = "-log(Length of a side of the square box)", main = "Box-Counting Dimension")
-  }
-  
+  class(bcd_matrix) = c(class(bcd_matrix), "bcd_matrix")
+  return(bcd_matrix)
+}
+
+linreg_bcd = function(bcd_matrix)
+{
   cat("Performing simple linear regression to determine Box-Counting dimension...\n")
   bcd_lm = lm(bcd_matrix[,2] ~ bcd_matrix[,1])
-  
-  if(plot)
+}
+
+#' Import Spatial Vector Data
+#'
+#' @param x Object of class `sf`
+#' @param dsn Data source name such as the directory where the file is located
+#' @param layer Layer name such as the filename of the file to be converted
+#' @param ... Other arguments passed on to `sf::st_read()` together with `dsn` and `layer`
+#'
+#' @importFrom sf st_transform
+#' @return Object of class `sf`. If CRS of the original data is in Long/Lat, it is transformed to EPSG:3857
+#' @export
+#' 
+import_SVD = function(x, dsn, layer, ...)
+{
+  k = if(is.null(x))
+    import_sf(dsn, layer, ...) else
+      if(st_is_longlat(x))
+      {
+        cat("Note: Coordinates in Lat/Long; reprojecting to EPSG:3857...\n")
+        st_transform(x, 3857)
+      } else x
+  if("sf" %in% class(k))
   {
-    cat("Plotting best-fit line...\n")
-    abline(reg = bcd_lm, col = "blue", lty = 2)
+    class(k) = c(class(k), "selfSA")
   }
+  return(k)
+}
+
+#' @importFrom graphics abline
+plot_slope = function(bcd_matrix, bcd_lm)
+{
+  cat("Plotting requested...\n")
+  plot(bcd_matrix, ylab = "log(Number of boxes needed to cover)", xlab = "-log(Length of a side of the square box)", main = "Box-Counting Dimension")
   
+  cat("Plotting best-fit line...\n")
+  abline(reg = bcd_lm, col = "blue", lty = 2)
+}
+
+#' @importFrom stats coef lm
+calc_slope = function(bcd_lm)
+{
   as.numeric(coef(bcd_lm))[2]
 }
