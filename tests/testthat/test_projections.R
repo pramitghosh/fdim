@@ -3,7 +3,7 @@ library('sameSVD')
 library('sf')
 library('rnaturalearth')
 
-deutschland = ne_countries(scale = "medium", country = "Germany", returnclass = "sf")
+deutschland = import_SVD(ne_countries(scale = "medium", country = "Germany", returnclass = "sf"))
 
 test_that(desc = "Importing sf with long/lat CRS",
             {
