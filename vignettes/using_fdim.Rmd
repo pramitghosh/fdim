@@ -22,7 +22,7 @@ This vignette aims at providing an overview of how the calculation of the fracta
 
 # Calculating the Box-Counting Dimension
 
-The fdim package is used for calculating the fractal dimension of a simple feature of geometry type `POLYGON` using the box-counting technique. It is done by performing the following important steps:
+The `sameSVD` package is used for calculating the fractal dimension of a simple feature of geometry type `POLYGON` using the box-counting technique. It is done by performing the following important steps:
 
 - Importing a simple feature as an object of class `sf`.
 - If the imported simple feature has spherical coordinates ($\mathbb{S}^2$), it is projected conformally using the Mercator projection (EPSG:3857) so that it is referenced using Cartesian coordinate reference system ($\mathbb{R}^2$).
@@ -42,7 +42,7 @@ seq(10000, 100000, 10000)
 library('sameSVD')
 ```
 
-`fdim` allows the import of a simple feature in two ways.
+`sameSVD` allows the import of a simple feature in two ways.
 
 - If the feature is stored in an external file, it may be imported using the `dsn` and `layer` arguments in the function `bcd()` along with any other arguments for `sf::st_read()`. The `plot = TRUE` argument plots the scatterplot and the shows the best-fit line obtained from the simple linear regression. The default argument for `plot` is `FALSE`.
 

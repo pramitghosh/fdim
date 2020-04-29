@@ -1,8 +1,8 @@
 # sameSVD
 
-![R-CMD-check](https://github.com/pramitghosh/fdim/workflows/R-CMD-check/badge.svg) 
-![pkgdown](https://github.com/pramitghosh/fdim/workflows/pkgdown/badge.svg) 
-[![codecov](https://codecov.io/gh/pramitghosh/fdim/branch/master/graph/badge.svg)](https://codecov.io/gh/pramitghosh/fdim) 
+![R-CMD-check](https://github.com/pramitghosh/sameSVD/workflows/R-CMD-check/badge.svg) 
+[![pkgdown](https://github.com/pramitghosh/sameSVD/workflows/pkgdown/badge.svg)](https://pramitghosh.github.io/sameSVD) 
+[![codecov](https://codecov.io/gh/pramitghosh/sameSVD/branch/master/graph/badge.svg)](https://codecov.io/gh/pramitghosh/sameSVD) 
 
 Author: Pramit Ghosh
 
@@ -12,7 +12,7 @@ Author: Pramit Ghosh
 
 > This package is still under development and many of the objectives of this package are yet to be implemented or conceptualized.
 
-The objective of this package is to establish (if required) and implement measures of (self-)similarity and (self-)affinity for spatial vector data represented in accordance with the [Simple Features](https://en.wikipedia.org/wiki/Simple_Features) (officially *Simple Features Access*) specifications, as endorsed by [OGC](https://www.ogc.org/projects/groups/sfswg) and [ISO](https://www.iso.org/standard/40114.html).
+The objective of this package is to establish (if required) and implement measures of (self-)similarity and (self-)affinity for spatial vector data represented in accordance with the [Simple Features](https://en.wikipedia.org/wiki/Simple_Features) (officially *Simple Features Access*) specifications, as standardized by [OGC](https://www.ogc.org/projects/groups/sfswg) and [ISO](https://www.iso.org/standard/40114.html).
 
 ### Present Status
 
@@ -51,4 +51,4 @@ deutschland = ne_countries(scale = "medium", country = "Germany", returnclass = 
 bcd(deutschland, plot = TRUE)
 ```
 
-A more detailed illustration along with the internal working can be found in the [vignettes](https://pramitghosh.github.io/fdim/articles/using_fdim.html).
+A more detailed illustration along with the internal working can be found in the [vignettes](https://pramitghosh.github.io/sameSVD/articles/using_fdim.html).

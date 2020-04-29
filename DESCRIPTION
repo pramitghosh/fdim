@@ -1,5 +1,5 @@
 Package: sameSVD
-Title: Box-Counting Dimension of a Simple Feature Polygon
+Title: Similarity and Affinity Measures for Spatial Vector Data
 Type: Package
 Description: Provides an implementation in R to calculate measures of (self-)similarity and (self-)affinity of spatial vector data.
 Version: 0.2.0
