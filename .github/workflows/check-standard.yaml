@@ -79,7 +79,7 @@ jobs:
         run: |
           Rscript -e "install.packages('remotes')"
           
-          Rscript -e "remotes::install_github('r-hub/sysreqs')"
+          Rscript -e "remotes::install_github('r-hub/sysreqs', force=TRUE)"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
           sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
