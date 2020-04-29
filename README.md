@@ -1,8 +1,8 @@
 # sameSVD
 
-![R-CMD-check](https://github.com/pramitghosh/fdim/workflows/R-CMD-check/badge.svg) 
-![pkgdown](https://github.com/pramitghosh/fdim/workflows/pkgdown/badge.svg) 
-[![codecov](https://codecov.io/gh/pramitghosh/fdim/branch/master/graph/badge.svg)](https://codecov.io/gh/pramitghosh/fdim) 
+![R-CMD-check](https://github.com/pramitghosh/sameSVD/workflows/R-CMD-check/badge.svg) 
+[![pkgdown](https://github.com/pramitghosh/sameSVD/workflows/pkgdown/badge.svg)](https://pramitghosh.github.io/sameSVD) 
+[![codecov](https://codecov.io/gh/pramitghosh/sameSVD/branch/master/graph/badge.svg)](https://codecov.io/gh/pramitghosh/sameSVD) 
 
 Author: Pramit Ghosh
 
