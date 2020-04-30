@@ -14,7 +14,7 @@ test_that(desc = "Importing sf with long/lat CRS",
 
 test_that(desc = "Reading sf object with long/lat CRS",
             {
-              expect_output(bcd(deutschland, l = seq(25000, 100000, 25000)), "Note: Coordinates in Lat/Long; reprojecting to EPSG:3857...\n")
+              expect_equal(st_crs(import_SVD(x = deutschland))$input, "EPSG:3857")
             }
           )
 

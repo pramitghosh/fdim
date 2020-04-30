@@ -2,7 +2,7 @@ context("Plots\n")
 library(rnaturalearth)
 library(sameSVD)
 
-deutschland = ne_countries(scale = "medium", country = "Germany", returnclass = "sf")
+deutschland = import_SVD(ne_countries(scale = "medium", country = "Germany", returnclass = "sf"))
 
 test_that(desc = "Check plotting in bcd()",
             {
