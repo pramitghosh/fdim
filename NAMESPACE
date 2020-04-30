@@ -3,6 +3,7 @@
 export(bcd)
 export(import_SVD)
 importFrom(graphics,abline)
+importFrom(graphics,plot)
 importFrom(sf,st_intersection)
 importFrom(sf,st_is_longlat)
 importFrom(sf,st_make_grid)

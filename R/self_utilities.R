@@ -88,6 +88,7 @@ import_SVD = function(x = NULL, dsn, layer, ...)
 }
 
 #' @importFrom graphics abline
+#' @importFrom graphics plot
 plot_slope = function(bcd_matrix, bcd_lm)
 {
   cat("Plotting requested...\n")
