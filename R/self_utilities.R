@@ -71,7 +71,7 @@ linreg_bcd = function(bcd_matrix)
 #' @return Object of class `sf`. If CRS of the original data is in Long/Lat, it is transformed to EPSG:3857
 #' @export
 #' 
-import_SVD = function(x, dsn, layer, ...)
+import_SVD = function(x = NULL, dsn, layer, ...)
 {
   k = if(is.null(x))
     import_sf(dsn, layer, ...) else
@@ -82,7 +82,7 @@ import_SVD = function(x, dsn, layer, ...)
       } else x
   if("sf" %in% class(k))
   {
-    class(k) = c(class(k), "selfSA")
+    class(k) = c("selfSA", class(k))
   }
   return(k)
 }

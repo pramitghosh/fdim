@@ -40,6 +40,7 @@ seq(10000, 100000, 10000)
 
 ```{r}
 library('sameSVD')
+library('magrittr')
 ```
 
 `sameSVD` allows the import of a simple feature in two ways.
@@ -47,14 +48,15 @@ library('sameSVD')
 - If the feature is stored in an external file, it may be imported using the `dsn` and `layer` arguments in the function `bcd()` along with any other arguments for `sf::st_read()`. The `plot = TRUE` argument plots the scatterplot and the shows the best-fit line obtained from the simple linear regression. The default argument for `plot` is `FALSE`.
 
 ```{r fig.height=5, fig.width=7}
-bcd(dsn = system.file(package = "sameSVD"), layer = "madhya_pradesh", plot = TRUE)
+mp = import_SVD(dsn = system.file(package = "sameSVD"), layer = "madhya_pradesh")
+bcd(mp, plot = TRUE)
 ```
 
 - Alternatively, if the simple feature is already available to the user in the envrionment, it can be passed on to `bcd()` as the the argument `x`. The sequence of cell-sizes to be tested can be optionally modified by explicitly passing the argument `l` to `bcd()`.
 
 ```{r fig.height=5, fig.width=7}
 library('rnaturalearth')
-deutschland = ne_countries(scale = "medium", country = "Germany", returnclass = "sf")
+deutschland = import_SVD(ne_countries(scale = "medium", country = "Germany", returnclass = "sf"))
 bcd(deutschland, l = seq(10000, 100000, 15000), plot = TRUE)
 ```
 
