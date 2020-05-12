@@ -85,7 +85,7 @@
       <h1 data-toc-skip>Using sameSVD</h1>
                         <h4 class="author">Pramit Ghosh</h4>
             
-            <h4 class="date">2020-04-29</h4>
+            <h4 class="date">2020-05-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/pramitghosh/sameSVD/blob/master/vignettes/using_fdim.Rmd"><code>vignettes/using_fdim.Rmd</code></a></small>
       <div class="hidden name"><code>using_fdim.Rmd</code></div>
@@ -125,7 +125,7 @@
 <ul>
 <li>If the feature is stored in an external file, it may be imported using the <code>dsn</code> and <code>layer</code> arguments in the function <code><a href="../reference/bcd.html">bcd()</a></code> along with any other arguments for <code><a href="https://rdrr.io/pkg/sf/man/st_read.html">sf::st_read()</a></code>. The <code>plot = TRUE</code> argument plots the scatterplot and the shows the best-fit line obtained from the simple linear regression. The default argument for <code>plot</code> is <code>FALSE</code>.</li>
 </ul>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/bcd.html">bcd</a></span>(<span class="kw">dsn</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="kw">package</span> <span class="kw">=</span> <span class="st">"sameSVD"</span>), <span class="kw">layer</span> <span class="kw">=</span> <span class="st">"madhya_pradesh"</span>, <span class="kw">plot</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">mp</span> <span class="kw">=</span> <span class="fu"><a href="../reference/import_SVD.html">import_SVD</a></span>(<span class="kw">dsn</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="kw">package</span> <span class="kw">=</span> <span class="st">"sameSVD"</span>), <span class="kw">layer</span> <span class="kw">=</span> <span class="st">"madhya_pradesh"</span>)
 <span class="co">#&gt; Reading layer `madhya_pradesh' from data source `/Users/runner/runners/2.169.1/work/_temp/Library/sameSVD' using driver `ESRI Shapefile'</span>
 <span class="co">#&gt; Simple feature collection with 1 feature and 2 fields</span>
 <span class="co">#&gt; geometry type:  POLYGON</span>
@@ -134,26 +134,27 @@
 <span class="co">#&gt; CRS:            4326</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Note: Coordinates in Lat/Long; reprojecting to EPSG:3857...</span>
+<span class="fu"><a href="../reference/bcd.html">bcd</a></span>(<span class="kw">k</span> <span class="kw">=</span> <span class="no">mp</span>, <span class="kw">l</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">50000</span>, <span class="fl">100000</span>, <span class="fl">10000</span>), <span class="kw">plot</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="co">#&gt; Generating grids...</span>
 <span class="co">#&gt; Counting intersecting cells...</span>
+<span class="co">#&gt; Performing simple linear regression to determine Box-Counting dimension...</span>
 <span class="co">#&gt; Plotting requested...</span></pre></body></html></div>
 <p><img src="using_fdim_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
-<pre><code>#&gt; Performing simple linear regression to determine Box-Counting dimension...
-#&gt; Plotting best-fit line...
-#&gt; [1] 1.834641</code></pre>
+<pre><code>#&gt; Plotting best-fit line...
+#&gt; [1] 1.776026</code></pre>
 <ul>
 <li>Alternatively, if the simple feature is already available to the user in the envrionment, it can be passed on to <code><a href="../reference/bcd.html">bcd()</a></code> as the the argument <code>x</code>. The sequence of cell-sizes to be tested can be optionally modified by explicitly passing the argument <code>l</code> to <code><a href="../reference/bcd.html">bcd()</a></code>.</li>
 </ul>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">'rnaturalearth'</span>)
-<span class="no">deutschland</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rnaturalearth/man/ne_countries.html">ne_countries</a></span>(<span class="kw">scale</span> <span class="kw">=</span> <span class="st">"medium"</span>, <span class="kw">country</span> <span class="kw">=</span> <span class="st">"Germany"</span>, <span class="kw">returnclass</span> <span class="kw">=</span> <span class="st">"sf"</span>)
-<span class="fu"><a href="../reference/bcd.html">bcd</a></span>(<span class="no">deutschland</span>, <span class="kw">l</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">10000</span>, <span class="fl">100000</span>, <span class="fl">15000</span>), <span class="kw">plot</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="no">deutschland</span> <span class="kw">=</span> <span class="fu"><a href="../reference/import_SVD.html">import_SVD</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/rnaturalearth/man/ne_countries.html">ne_countries</a></span>(<span class="kw">scale</span> <span class="kw">=</span> <span class="st">"medium"</span>, <span class="kw">country</span> <span class="kw">=</span> <span class="st">"Germany"</span>, <span class="kw">returnclass</span> <span class="kw">=</span> <span class="st">"sf"</span>))
 <span class="co">#&gt; Note: Coordinates in Lat/Long; reprojecting to EPSG:3857...</span>
+<span class="fu"><a href="../reference/bcd.html">bcd</a></span>(<span class="no">deutschland</span>, <span class="kw">l</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">10000</span>, <span class="fl">100000</span>, <span class="fl">15000</span>), <span class="kw">plot</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="co">#&gt; Generating grids...</span>
 <span class="co">#&gt; Counting intersecting cells...</span>
+<span class="co">#&gt; Performing simple linear regression to determine Box-Counting dimension...</span>
 <span class="co">#&gt; Plotting requested...</span></pre></body></html></div>
 <p><img src="using_fdim_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
-<pre><code>#&gt; Performing simple linear regression to determine Box-Counting dimension...
-#&gt; Plotting best-fit line...
+<pre><code>#&gt; Plotting best-fit line...
 #&gt; [1] 1.893884</code></pre>
 <div id="internal-working" class="section level2">
 <h2 class="hasAnchor">

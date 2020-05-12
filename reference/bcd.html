@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Calculates the box-counting dimension of a polygon</h1>
-    <small class="dont-index">Source: <a href='https://github.com/pramitghosh/sameSVD/blob/master/R/script.R'><code>R/script.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/pramitghosh/sameSVD/blob/master/R/self.R'><code>R/self.R</code></a></small>
     <div class="hidden name"><code>bcd.Rd</code></div>
     </div>
 
@@ -132,40 +132,34 @@
     <p>Calculates the box-counting dimension of a polygon</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bcd</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>dsn</span>, <span class='no'>layer</span>, <span class='kw'>l</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>10000</span>, <span class='fl'>1e+05</span>, <span class='fl'>10000</span>), <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>bcd</span>(<span class='no'>k</span>, <span class='kw'>l</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>10000</span>, <span class='fl'>1e+05</span>, <span class='fl'>10000</span>), <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='co'># S3 method for self_similarity</span>
+<span class='fu'>bcd</span>(<span class='no'>k</span>, <span class='kw'>l</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>10000</span>, <span class='fl'>1e+05</span>, <span class='fl'>10000</span>), <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='co'># S3 method for self_affinity</span>
+<span class='fu'>bcd</span>(<span class='no'>k</span>, <span class='kw'>l</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>10000</span>, <span class='fl'>1e+05</span>, <span class='fl'>10000</span>), <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Object of class `sf`</p></td>
-    </tr>
-    <tr>
-      <th>dsn</th>
-      <td><p>Data source name such as the directory where the file is located</p></td>
-    </tr>
-    <tr>
-      <th>layer</th>
-      <td><p>Layer name such as the filename of the file to be converted</p></td>
+      <th>k</th>
+      <td><p>Spatial Vector data as an `sf` object</p></td>
     </tr>
     <tr>
       <th>l</th>
-      <td><p>Numeric sequence of different cell sizes that will be used to generate the grid. The cell size represents the length of a side of a single square box of the grid</p></td>
+      <td><p>Numeric or matrix; represents sequence of cell side lengths that will be used to generate the grid. Numeric value represents the length of a side of a single square box of the grid to calculate self-similarity; matrix columns represents the length and width of rectangular cells for calculating self-affinity.</p></td>
     </tr>
     <tr>
       <th>plot</th>
       <td><p>Logical; if true, a log-log plot of the number of cells used to cover the polygon vs the cell size will be plotted</p></td>
     </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Other arguments passed on to `st_read()` together with `dsn` and `layer`</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A numeric vector of length 1 representing the box-counting dimension of the polygon</p>
+    <p>A numeric vector representing the box-counting dimension of the spatial feature, `k`.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Counts the number of grid cells required to cover the shape polygon — count_cells • sameSVD</title>
+<title>Import Spatial Vector Data — import_SVD • sameSVD</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Counts the number of grid cells required to cover the shape polygon — count_cells" />
-<meta property="og:description" content="Counts the number of grid cells required to cover the shape polygon" />
+<meta property="og:title" content="Import Spatial Vector Data — import_SVD" />
+<meta property="og:description" content="Import Spatial Vector Data" />
 
 
 
@@ -123,33 +123,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Counts the number of grid cells required to cover the shape polygon</h1>
+    <h1>Import Spatial Vector Data</h1>
     <small class="dont-index">Source: <a href='https://github.com/pramitghosh/sameSVD/blob/master/R/self_utilities.R'><code>R/self_utilities.R</code></a></small>
-    <div class="hidden name"><code>count_cells.Rd</code></div>
+    <div class="hidden name"><code>import_SVD.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Counts the number of grid cells required to cover the shape polygon</p>
+    <p>Import Spatial Vector Data</p>
     </div>
 
-    <pre class="usage"><span class='fu'>count_cells</span>(<span class='no'>grid</span>, <span class='no'>f</span>)</pre>
+    <pre class="usage"><span class='fu'>import_SVD</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>dsn</span>, <span class='no'>layer</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>grid</th>
-      <td><p>The grid as an object of class sfc</p></td>
+      <th>x</th>
+      <td><p>Object of class `sf`</p></td>
     </tr>
     <tr>
-      <th>f</th>
-      <td><p>sf object that the grid is based on</p></td>
+      <th>dsn</th>
+      <td><p>Data source name such as the directory where the file is located</p></td>
+    </tr>
+    <tr>
+      <th>layer</th>
+      <td><p>Layer name such as the filename of the file to be converted</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other arguments passed on to `sf::st_read()` together with `dsn` and `layer`</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The number of grid cells of grid required to cover the polygon f</p>
+    <p>Object of class `sf`. If CRS of the original data is in Long/Lat, it is transformed to EPSG:3857</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
