@@ -1,6 +1,5 @@
 context("Test numeric outputs\n")
 library('sameSVD')
-library('magrittr')
 
 test_grids = lapply(as.list(seq(25000, 100000, 25000)), sameSVD:::overlay_grid, import_SVD(dsn = system.file(package = "sameSVD"), layer = "madhya_pradesh"))
 cell_counts = as.numeric(lapply(test_grids, sameSVD:::count_cells, import_SVD(dsn = system.file(package = "sameSVD"), layer = "madhya_pradesh")))

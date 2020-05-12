@@ -2,9 +2,15 @@
 % Please edit documentation in R/self.R
 \name{bcd}
 \alias{bcd}
+\alias{bcd.self_similarity}
+\alias{bcd.self_affinity}
 \title{Calculates the box-counting dimension of a polygon}
 \usage{
 bcd(k, l = seq(10000, 1e+05, 10000), plot = FALSE)
+
+\method{bcd}{self_similarity}(k, l = seq(10000, 1e+05, 10000), plot = FALSE)
+
+\method{bcd}{self_affinity}(k, l = seq(10000, 1e+05, 10000), plot = FALSE)
 }
 \arguments{
 \item{k}{Spatial Vector data as an `sf` object}

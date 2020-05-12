@@ -5,22 +5,28 @@
 #' @param k Spatial Vector data as an `sf` object
 #' 
 #' @return A numeric vector representing the box-counting dimension of the spatial feature, `k`.
+#' @name bcd
 #' @export
 bcd = function(k, l = seq(10000, 100000, 10000), plot = FALSE)
 {
-  if("selfSA" %in% class(k))
-    UseMethod("bcd", k)
+  if("numeric" %in% class(l))
+  class(k) = c("self_similarity", class(k))
+  if("matrix" %in% class(l))
+    class(k) = c("self_affinity", class(k))
+  UseMethod("bcd", k)
 }
 
-bcd.selfSA = function(k, l = seq(10000, 100000, 10000), plot = FALSE)
-{
-  if("numeric" %in% class(l))
-    class(l) = c("self_similarity", class(l))
-  if("matrix" %in% class(l))
-    class(l) = c("self_affinity", class(l))
-  UseMethod("bcd", l)
-}
+# bcd.selfSA = function(k, l = seq(10000, 100000, 10000), plot = FALSE)
+# {
+#   if("numeric" %in% class(l))
+#     class(k) = c("self_similarity", class(k))
+#   if("matrix" %in% class(l))
+#     class(k) = c("self_affinity", class(k))
+#   UseMethod("bcd")
+# }
   
+#' @name bcd
+#' @export
 bcd.self_similarity = function(k, l = seq(10000, 100000, 10000), plot = FALSE)
 {
   bcd_matrix = generate_matrix(l, k)
@@ -29,6 +35,9 @@ bcd.self_similarity = function(k, l = seq(10000, 100000, 10000), plot = FALSE)
   return(calc_slope(bcd_lm))
 }
 
+
+#' @name bcd
+#' @export
 bcd.self_affinity = function(k, l = seq(10000, 100000, 10000), plot = FALSE)
 {
   # Write code for self-similarity using BCD
