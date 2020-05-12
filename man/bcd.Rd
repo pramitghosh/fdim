@@ -6,7 +6,7 @@
 \alias{bcd.self_affinity}
 \title{Calculates the box-counting dimension of a polygon}
 \usage{
-bcd(k, l = seq(10000, 1e+05, 10000), ...)
+bcd(k, l = seq(10000, 1e+05, 10000), plot = FALSE)
 
 \method{bcd}{self_similarity}(k, l = seq(10000, 1e+05, 10000), plot = FALSE)
 

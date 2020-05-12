@@ -7,7 +7,7 @@
 #' @return A numeric vector representing the box-counting dimension of the spatial feature, `k`.
 #' @name bcd
 #' @export
-bcd = function(k, l = seq(10000, 100000, 10000), ...)
+bcd = function(k, l = seq(10000, 100000, 10000), plot = FALSE)
 {
   if("numeric" %in% class(l))
   class(k) = c("self_similarity", class(k))

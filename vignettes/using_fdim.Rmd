@@ -40,7 +40,6 @@ seq(10000, 100000, 10000)
 
 ```{r}
 library('sameSVD')
-library('magrittr')
 ```
 
 `sameSVD` allows the import of a simple feature in two ways.
