@@ -80,10 +80,10 @@ import_SVD = function(x = NULL, dsn, layer, ...)
         cat("Note: Coordinates in Lat/Long; reprojecting to EPSG:3857...\n")
         st_transform(x, 3857)
       } else x
-  if("sf" %in% class(k))
-  {
-    class(k) = c("selfSA", class(k))
-  }
+  # if("sf" %in% class(k))
+  # {
+  #   class(k) = c("selfSA", class(k))
+  # }
   return(k)
 }
 

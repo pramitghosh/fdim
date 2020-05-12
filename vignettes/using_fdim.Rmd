@@ -49,7 +49,7 @@ library('magrittr')
 
 ```{r fig.height=5, fig.width=7}
 mp = import_SVD(dsn = system.file(package = "sameSVD"), layer = "madhya_pradesh")
-bcd(mp, plot = TRUE)
+bcd(k = mp, l = seq(50000, 100000, 10000), plot = TRUE)
 ```
 
 - Alternatively, if the simple feature is already available to the user in the envrionment, it can be passed on to `bcd()` as the the argument `x`. The sequence of cell-sizes to be tested can be optionally modified by explicitly passing the argument `l` to `bcd()`.
