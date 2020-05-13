@@ -38,7 +38,23 @@ bcd.self_similarity = function(k, l = seq(10000, 100000, 10000), plot = FALSE)
 
 #' @name bcd
 #' @export
-bcd.self_affinity = function(k, l = seq(10000, 100000, 10000), plot = FALSE)
+bcd.self_affinity = function(k, l = matrix(rep(seq(10000, 100000, 10000), 2), ncol = 2), plot = FALSE)
 {
-  # Write code for self-similarity using BCD
+  cs_x = matrix(c(l[,1], rep(min(l[,2]), times = nrow(l))), ncol = 2)
+  cs_y = matrix(c(rep(min(l[,1]), times = nrow(l)), l[,2]), ncol = 2)
+  
+  bcd_matrix_x = generate_matrix_affinity(l = cs_x, k, dimension = 1)
+  bcd_matrix_y = generate_matrix_affinity(l = cs_y, k, dimension = 2)
+  bcd_matrix = list(x = bcd_matrix_x, y = bcd_matrix_y)
+  
+  bcd_lm = lapply(bcd_matrix, linreg_bcd)
+  if(plot)
+  {
+    par(mfrow = c(1,2))
+    plot_slope(bcd_matrix[[1]], bcd_lm[[1]])
+    plot_slope(bcd_matrix[[2]], bcd_lm[[2]])
+    par(mfrow = c(1,1))
+  }
+  
+  return(sapply(bcd_lm, calc_slope))
 }
