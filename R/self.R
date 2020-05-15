@@ -43,8 +43,11 @@ bcd.self_affinity = function(k, l = matrix(rep(seq(10000, 100000, 10000), 2), nc
   cs_x = matrix(c(l[,1], rep(min(l[,2]), times = nrow(l))), ncol = 2)
   cs_y = matrix(c(rep(min(l[,1]), times = nrow(l)), l[,2]), ncol = 2)
   
-  bcd_matrix_x = generate_matrix_affinity(l = cs_x, k, dimension = 1)
-  bcd_matrix_y = generate_matrix_affinity(l = cs_y, k, dimension = 2)
+  # bcd_matrix_x = generate_matrix_affinity(l = cs_x, k, dimension = 1)
+  # bcd_matrix_y = generate_matrix_affinity(l = cs_y, k, dimension = 2)
+  
+  bcd_matrix_x = generate_matrix(l = cs_x, k, dimension = 1)
+  bcd_matrix_y = generate_matrix(l = cs_y, k, dimension = 2)
   bcd_matrix = list(x = bcd_matrix_x, y = bcd_matrix_y)
   
   bcd_lm = lapply(bcd_matrix, linreg_bcd)
