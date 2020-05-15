@@ -67,6 +67,7 @@ generate_matrix = function(l, k, dimension = 1)
   return(bcd_matrix)
 }
 
+#' @importFrom stats lm
 linreg_bcd = function(bcd_matrix)
 {
   cat("Performing simple linear regression to determine Box-Counting dimension...\n")
@@ -111,7 +112,7 @@ plot_slope = function(bcd_matrix, bcd_lm)
   abline(reg = bcd_lm, col = "blue", lty = 2)
 }
 
-#' @importFrom stats coef lm
+#' @importFrom stats coef
 calc_slope = function(bcd_lm)
 {
   as.numeric(coef(bcd_lm))[2]

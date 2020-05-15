@@ -10,7 +10,7 @@ bcd(k, l = seq(10000, 1e+05, 10000), plot = FALSE)
 
 \method{bcd}{self_similarity}(k, l = seq(10000, 1e+05, 10000), plot = FALSE)
 
-\method{bcd}{self_affinity}(k, l = seq(10000, 1e+05, 10000), plot = FALSE)
+\method{bcd}{self_affinity}(k, l = matrix(rep(seq(10000, 1e+05, 10000), 2), ncol = 2), plot = FALSE)
 }
 \arguments{
 \item{k}{Spatial Vector data as an `sf` object}

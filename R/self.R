@@ -37,6 +37,7 @@ bcd.self_similarity = function(k, l = seq(10000, 100000, 10000), plot = FALSE)
 
 
 #' @name bcd
+#' @importFrom graphics par
 #' @export
 bcd.self_affinity = function(k, l = matrix(rep(seq(10000, 100000, 10000), 2), ncol = 2), plot = FALSE)
 {
