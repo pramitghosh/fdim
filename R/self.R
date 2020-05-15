@@ -15,15 +15,6 @@ bcd = function(k, l = seq(10000, 100000, 10000), plot = FALSE)
     class(k) = c("self_affinity", class(k))
   UseMethod("bcd", k)
 }
-
-# bcd.selfSA = function(k, l = seq(10000, 100000, 10000), plot = FALSE)
-# {
-#   if("numeric" %in% class(l))
-#     class(k) = c("self_similarity", class(k))
-#   if("matrix" %in% class(l))
-#     class(k) = c("self_affinity", class(k))
-#   UseMethod("bcd")
-# }
   
 #' @name bcd
 #' @export
@@ -43,9 +34,6 @@ bcd.self_affinity = function(k, l = matrix(rep(seq(10000, 100000, 10000), 2), nc
 {
   cs_x = matrix(c(l[,1], rep(min(l[,2]), times = nrow(l))), ncol = 2)
   cs_y = matrix(c(rep(min(l[,1]), times = nrow(l)), l[,2]), ncol = 2)
-  
-  # bcd_matrix_x = generate_matrix_affinity(l = cs_x, k, dimension = 1)
-  # bcd_matrix_y = generate_matrix_affinity(l = cs_y, k, dimension = 2)
   
   bcd_matrix_x = generate_matrix(l = cs_x, k, dimension = 1)
   bcd_matrix_y = generate_matrix(l = cs_y, k, dimension = 2)

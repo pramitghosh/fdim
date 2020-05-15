@@ -118,18 +118,3 @@ calc_slope = function(bcd_lm)
   as.numeric(coef(bcd_lm))[2]
 }
 
-# generate_matrix_affinity = function(l, k, dimension = 1)
-# {
-#   cat("Generating grids...\n")
-#   cs_list = lapply(1:10, function(x) l[x,])
-#   
-#   grids = lapply(cs_list, overlay_grid, k)
-#   
-#   cat("Counting intersecting cells...\n")
-#   int_grids = lapply(grids, count_cells, k)
-#   
-#   bcd_matrix = log(cbind(1/l[, dimension], as.numeric(int_grids)))
-#   class(bcd_matrix) = c(class(bcd_matrix), "bcd_matrix")
-#   return(bcd_matrix)
-# }
-
