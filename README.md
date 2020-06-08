@@ -19,7 +19,7 @@ The objective of this package is to establish (if required) and implement measur
 |  | Similarity | Affinity |
 |--------|-----------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Self | - `*POINT` [done]<br>- `*LINESTRING` [done]<br>- `*POLYGON` [done] | - `*POINT` [not implemented yet]<br>- `*LINESTRING` [not implemented yet]<br>- `*POLYGON` [not implemented yet]<br><br>*to be implemented using box-counting dimension* |
-| Others | - `*POINT` [?]<br>- `*LINESTRING` [turning angles]<br>- `*POLYGON` [turning angles] | - `*POINT` [?]<br>- `*LINESTRING` [?]<br>- `*POLYGON` [?]<br><br>*need suitable algorithms to implement* |
+| Others | - `*POINT` [?]<br>- `LINESTRING` [turning angles]<br>- `POLYGON` [turning angles]<br>- `MULTILINESTRING` [?]<br>- `MULTIPOLYGON` [?] | - `*POINT` [?]<br>- `*LINESTRING` [?]<br>- `*POLYGON` [?]<br><br>*need suitable algorithms to implement* |
 
 
 ## Installation
