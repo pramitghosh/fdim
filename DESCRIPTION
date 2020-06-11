@@ -4,7 +4,7 @@ Type: Package
 Description: Provides an implementation in R to calculate measures of (self-)similarity and (self-)affinity of spatial vector data.
 Version: 0.2.0
 Authors@R: person("Pramit", "Ghosh", email = "pramitghosh@outlook.com", 
-  role = c("aut", "cre"))
+  role = c("aut", "cre"), comment = c(ORCID = "0000-0002-1852-5951"))
 Maintainer: Pramit Ghosh <pramitghosh@outlook.com>
 Depends: R (>= 3.6)
 License: MIT + file LICENSE
