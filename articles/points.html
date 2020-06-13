@@ -85,7 +85,7 @@
       <h1 data-toc-skip>Box-Counting dimension of point datasets</h1>
                         <h4 class="author">Pramit Ghosh</h4>
             
-            <h4 class="date">2020-06-08</h4>
+            <h4 class="date">2020-06-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/pramitghosh/sameSVD/blob/master/vignettes/points.Rmd"><code>vignettes/points.Rmd</code></a></small>
       <div class="hidden name"><code>points.Rmd</code></div>
@@ -108,7 +108,7 @@
 <p>In the following examples, the Box-Counting Dimension will be calculated for both arbitrary <code>MULTIPOINT</code> features with theoretically known fractal dimensions as well as for real-world datasets.</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Loading pre-requisite packages</span>
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">sf</span>)
-<span class="co">#&gt; Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0</span>
+<span class="co">#&gt; Linking to GEOS 3.8.1, GDAL 2.4.4, PROJ 7.0.1</span>
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">sameSVD</span>)</pre></body></html></div>
 <div id="features-with-known-box-counting-dimensions" class="section level2">
 <h2 class="hasAnchor">
@@ -180,10 +180,10 @@
 <span class="co">#&gt; Simple feature collection with 1 feature and 0 fields</span>
 <span class="co">#&gt; geometry type:  MULTIPOINT</span>
 <span class="co">#&gt; dimension:      XY</span>
-<span class="co">#&gt; bbox:           xmin: 0.001463016 ymin: 0 xmax: 0.9988182 ymax: 0.864468</span>
+<span class="co">#&gt; bbox:           xmin: 0 ymin: 0 xmax: 0.9978534 ymax: 0.863305</span>
 <span class="co">#&gt; CRS:            EPSG:3857</span>
 <span class="co">#&gt;   st_sfc.st_multipoint.sierpinski_pts...crs...3857.</span>
-<span class="co">#&gt; 1                    MULTIPOINT ((0.5 0), (0.25 ...</span>
+<span class="co">#&gt; 1                    MULTIPOINT ((0 0), (0.5 0),...</span>
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="no">sierpinski_sf</span>, <span class="kw">axes</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
 <p><img src="points_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
 <p>The Box-Counting Dimension of this figure is calculated using <code><a href="../reference/bcd.html">bcd()</a></code> as illustrated below.</p>
@@ -194,7 +194,7 @@
 <span class="co">#&gt; Plotting requested...</span></pre></body></html></div>
 <p><img src="points_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
 <pre><code>#&gt; Plotting best-fit line...
-#&gt; [1] 1.599704</code></pre>
+#&gt; [1] 1.598924</code></pre>
 <p>The regression gives a Box-Counting dimension of ~1.59 which is very close to the theoretical value.</p>
 </div>
 </div>
