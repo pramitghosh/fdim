@@ -41,19 +41,33 @@ count_cells = function(grid, f)
   num_intersects = length(st_intersection(grid, f))
 }
 
-generate_matrix = function(l, k)
+generate_matrix = function(l, k, dimension = 1)
 {
   cat("Generating grids...\n")
-  grids = lapply(as.list(l), overlay_grid, k)
+  mode = if(inherits(l, "numeric")) "ss" else
+            if(inherits(l, "matrix")) "sa"
+  
+  if(mode == "ss")
+    grids = lapply(as.list(l), overlay_grid, k)
+  else if(mode == "sa")
+  {
+    cs_list = lapply(1:nrow(l), function(x) l[x,])
+    grids = lapply(cs_list, overlay_grid, k)
+  }
   
   cat("Counting intersecting cells...\n")
   int_grids = lapply(grids, count_cells, k)
   
-  bcd_matrix = log(cbind(1/l, as.numeric(int_grids)))
+  if(mode == "ss")
+    bcd_matrix = log(cbind(1/l, as.numeric(int_grids)))
+  else if(mode == "sa")
+    bcd_matrix = log(cbind(1/l[, dimension], as.numeric(int_grids)))
+  
   class(bcd_matrix) = c(class(bcd_matrix), "bcd_matrix")
   return(bcd_matrix)
 }
 
+#' @importFrom stats lm
 linreg_bcd = function(bcd_matrix)
 {
   cat("Performing simple linear regression to determine Box-Counting dimension...\n")
@@ -98,8 +112,9 @@ plot_slope = function(bcd_matrix, bcd_lm)
   abline(reg = bcd_lm, col = "blue", lty = 2)
 }
 
-#' @importFrom stats coef lm
+#' @importFrom stats coef
 calc_slope = function(bcd_lm)
 {
   as.numeric(coef(bcd_lm))[2]
 }
+
