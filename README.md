@@ -41,11 +41,22 @@ These can be installed by running the following command in R:
 ```r
 install.packages(c("sf", "rnaturalearth", "rnaturalearthdata", "rgeos"))
 ```
+### Installing `sameSVD`
+
+This package can be installed as follows
+
+```r
+install.packages("remotes")
+library(remotes)
+install_github("pramitghosh/sameSVD")
+```
+
 ## Usage
 
 The Box-Counting dimension can be calculated using `bcd()`. The following example illustrates the usage.
 
 ```r
+library(sameSVD)
 library(rnaturalearth)
 deutschland = ne_countries(scale = "medium", country = "Germany", returnclass = "sf")
 bcd(deutschland, plot = TRUE)
