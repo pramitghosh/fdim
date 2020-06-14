@@ -144,12 +144,22 @@
 <p>These can be installed by running the following command in R:</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"sf"</span>, <span class="st">"rnaturalearth"</span>, <span class="st">"rnaturalearthdata"</span>, <span class="st">"rgeos"</span>))</pre></div>
 </div>
+<div id="installing-samesvd" class="section level3">
+<h3 class="hasAnchor">
+<a href="#installing-samesvd" class="anchor"></a>Installing <code>sameSVD</code>
+</h3>
+<p>This package can be installed as follows</p>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">remotes</span>)
+<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"pramitghosh/sameSVD"</span>)</pre></div>
+</div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p>The Box-Counting dimension can be calculated using <code><a href="reference/bcd.html">bcd()</a></code>. The following example illustrates the usage.</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rnaturalearth</span>)
+<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">sameSVD</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rnaturalearth</span>)
 <span class="no">deutschland</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rnaturalearth/man/ne_countries.html">ne_countries</a></span>(<span class="kw">scale</span> <span class="kw">=</span> <span class="st">"medium"</span>, <span class="kw">country</span> <span class="kw">=</span> <span class="st">"Germany"</span>, <span class="kw">returnclass</span> <span class="kw">=</span> <span class="st">"sf"</span>)
 <span class="fu"><a href="reference/bcd.html">bcd</a></span>(<span class="no">deutschland</span>, <span class="kw">plot</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></div>
 <p>A more detailed illustration along with the internal working can be found in the <a href="https://pramitghosh.github.io/sameSVD/articles/using_fdim.html">vignettes</a>.</p>
