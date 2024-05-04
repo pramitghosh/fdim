@@ -37,3 +37,7 @@ rsconnect/
 fdim.Rproj
 doc
 Meta
+.Rproj.user
+.Rdata
+.DS_Store
+.quarto
