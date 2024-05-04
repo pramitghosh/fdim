@@ -10,7 +10,7 @@ Depends: R (>= 3.6)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.0.0
+RoxygenNote: 7.3.1
 Imports: 
     sf,
     graphics,
@@ -20,10 +20,9 @@ Suggests:
     rmarkdown,
     rnaturalearth,
     rnaturalearthdata,
-    rgeos,
     testthat
 NeedsCompilation: no
 VignetteBuilder: knitr
 Packaged: 2017-08-22 14:29:24 UTC; Pramit
-URL: https://github.com/pramitghosh/sameSVD
+URL: https://github.com/pramitghosh/sameSVD, https://pramitghosh.github.io/sameSVD/
 BugReports: https://github.com/pramitghosh/sameSVD/issues
