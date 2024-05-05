@@ -39,8 +39,11 @@ A numeric vector representing the box-counting dimension of the spatial feature,
 Calculates the self-similar or self-affine fractal dimension. If argument `l` is a numeric vector, self-similarity is calculated. If it is a matrix, then self-affinity is calculated and returns the global self-affine fractal dimension. If `affine_local` is set to `TRUE`, then global and local self-affine fractal dimensions are returned.
 }
 \examples{
-import_SVD(rnaturalearth::ne_countries(scale = "medium", country = "Nepal", returnclass = "sf")) |> bcd(l = seq(10000, 100000, 15000), plot = TRUE)
+import_SVD(rnaturalearth::ne_countries(scale = "medium", country = "Nepal", returnclass = "sf")) |>
+bcd(l = seq(10000, 100000, 15000), plot = TRUE)
 
-rnaturalearth::ne_countries(scale = "medium", country = "Ukraine", returnclass = "sf") |> import_SVD() |> bcd(l = matrix(rep(seq(10000, 100000, 10000), 2), ncol = 2), affine_local = TRUE, plot = TRUE)
+rnaturalearth::ne_countries(scale = "medium", country = "Ukraine", returnclass = "sf") |>
+import_SVD() |>
+bcd(l = matrix(rep(seq(10000, 100000, 10000), 2), ncol = 2), affine_local = TRUE, plot = TRUE)
 
 }

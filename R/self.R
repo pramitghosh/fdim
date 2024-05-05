@@ -23,7 +23,8 @@ bcd = function(k, l, plot, ...)
 #' @name bcd
 #' @export
 #' @examples
-#' import_SVD(rnaturalearth::ne_countries(scale = "medium", country = "Nepal", returnclass = "sf")) |> bcd(l = seq(10000, 100000, 15000), plot = TRUE)
+#' import_SVD(rnaturalearth::ne_countries(scale = "medium", country = "Nepal", returnclass = "sf")) |>
+#' bcd(l = seq(10000, 100000, 15000), plot = TRUE)
 #' 
 bcd.self_similarity = function(k, l = seq(10000, 100000, 10000), plot = FALSE, ...)
 {
@@ -41,7 +42,9 @@ bcd.self_similarity = function(k, l = seq(10000, 100000, 10000), plot = FALSE, .
 #' @importFrom graphics par
 #' @export
 #' @examples
-#' rnaturalearth::ne_countries(scale = "medium", country = "Ukraine", returnclass = "sf") |> import_SVD() |> bcd(l = matrix(rep(seq(10000, 100000, 10000), 2), ncol = 2), affine_local = TRUE, plot = TRUE)
+#' rnaturalearth::ne_countries(scale = "medium", country = "Ukraine", returnclass = "sf") |>
+#' import_SVD() |>
+#' bcd(l = matrix(rep(seq(10000, 100000, 10000), 2), ncol = 2), affine_local = TRUE, plot = TRUE)
 #' 
 bcd.self_affinity = function(k, l = matrix(rep(seq(10000, 100000, 10000), 2), ncol = 2), plot = FALSE, anisotropy = 1.25, affine_local = FALSE, ...)
 {
