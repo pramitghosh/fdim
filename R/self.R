@@ -22,6 +22,9 @@ bcd = function(k, l, plot, ...)
 #' Calculates self-similar box-counting dimensions  
 #' @name bcd
 #' @export
+#' @examples
+#' import_SVD(rnaturalearth::ne_countries(scale = "medium", country = "Nepal", returnclass = "sf")) |> bcd(l = seq(10000, 100000, 15000), plot = TRUE)
+#' 
 bcd.self_similarity = function(k, l = seq(10000, 100000, 10000), plot = FALSE, ...)
 {
   bcd_matrix = generate_matrix(l, k)
@@ -37,6 +40,9 @@ bcd.self_similarity = function(k, l = seq(10000, 100000, 10000), plot = FALSE, .
 #' @name bcd
 #' @importFrom graphics par
 #' @export
+#' @examples
+#' rnaturalearth::ne_countries(scale = "medium", country = "Ukraine", returnclass = "sf") |> import_SVD() |> bcd(l = matrix(rep(seq(10000, 100000, 10000), 2), ncol = 2), affine_local = TRUE, plot = TRUE)
+#' 
 bcd.self_affinity = function(k, l = matrix(rep(seq(10000, 100000, 10000), 2), ncol = 2), plot = FALSE, anisotropy = 1.25, affine_local = FALSE, ...)
 {
   cs_x = matrix(c(l[,1], rep(min(l[,2]), times = nrow(l))), ncol = 2)
@@ -60,7 +66,7 @@ bcd.self_affinity = function(k, l = matrix(rep(seq(10000, 100000, 10000), 2), nc
   
   if(calculated_anisotropy < anisotropy)
   {
-    cat(paste("Important Note!\nAnisotropy calculated to be ", calculated_anisotropy, ". The feature doesn't seem to exhibit self-affinity. Local and global self-affine fractal dimensions may not be reliable!"))
+    cat(paste("Important Note!\nAnisotropy calculated to be ", calculated_anisotropy, ". The feature doesn't seem to exhibit self-affinity. Local and global self-affine fractal dimensions may not be reliable!\n"))
   }
   
   v_x = max(scaling_exponents)
