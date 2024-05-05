@@ -7,7 +7,7 @@
 overlay_grid(cs, f)
 }
 \arguments{
-\item{cs}{The cell size of the grid that is to be created. This will be set as the cell width in both x- and y-directions}
+\item{cs}{The cell size of the grid that is to be created. This will be set as the side-length in x- and y-directions}
 
 \item{f}{The sf object based on which the grid will be created}
 }

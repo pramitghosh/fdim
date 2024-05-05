@@ -22,7 +22,7 @@ import_sf = function(dsn, layer, ...)
 
 #' Create grids for polygons supplied as arguments
 #' @param f The sf object based on which the grid will be created
-#' @param cs The cell size of the grid that is to be created. This will be set as the cell width in both x- and y-directions
+#' @param cs The cell size of the grid that is to be created. This will be set as the side-length in x- and y-directions
 #' @importFrom sf st_make_grid
 #' @return An object of class `sfc` with square polygons
 overlay_grid = function(cs, f)
@@ -106,7 +106,7 @@ import_SVD = function(x = NULL, dsn, layer, ...)
 plot_slope = function(bcd_matrix, bcd_lm)
 {
   cat("Plotting requested...\n")
-  plot(bcd_matrix, ylab = "log(Number of boxes needed to cover)", xlab = "-log(Length of a side of the square box)", main = "Box-Counting Dimension")
+  plot(bcd_matrix, ylab = "log(Number of boxes needed to cover)", xlab = "-log(Length of a side of the box)", main = "Box-Counting Dimension")
   
   cat("Plotting best-fit line...\n")
   abline(reg = bcd_lm, col = "blue", lty = 2)
@@ -118,3 +118,17 @@ calc_slope = function(bcd_lm)
   as.numeric(coef(bcd_lm))[2]
 }
 
+calc_anisotropy = function(scaling_exponents)
+{
+  if(length(scaling_exponents) != 2)
+  {
+    print("Expected scaling exponents for two directions!")
+    return(FALSE)
+  }
+  
+  # Assuming v_x > v_y
+  cat(paste('v_x = ', max(scaling_exponents), '\n'))
+  cat(paste('v_y = ', min(scaling_exponents), '\n'))
+  
+  return(max(scaling_exponents)/min(scaling_exponents))
+}
