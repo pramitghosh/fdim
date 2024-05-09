@@ -115,7 +115,7 @@ Barnsley fern is a well-known fractal that was first described by a British math
 
 In an IFS, a fractal is constructed iteratively as the union of several copies of itself. Before performing the union of the set, self-affine transformations are often applied to the component copies by a function system with finite number of contraction mappings. Formally, the IFS is usually expressed using a Hutchinson operator. Let $\{f_i\colon X\to X\mid1\le i\le N\}$ be an IFS - i.e. a set of contractions on set $X$ to itself. Then the operator $H$ is defined over subsets $S\subset X$ as $$H(S)=\bigcup\limits_{i=1}^{N}f_i(S)$$.
 
-### Generating the fern programmatically
+#### Generating the fern programmatically
 
 The finite set of affine transformations are applied stochastically depending on its influence on the generation of the fern.
 
@@ -165,7 +165,7 @@ plot(fern_sf, pch = '.', axes = TRUE, col = "forestgreen")
 
 ```
 
-## Computing the fractal dimension
+#### Computing the fractal dimension
 
 The fractal dimension is calculated for the Barnsley fern using `bcd()`.
 
