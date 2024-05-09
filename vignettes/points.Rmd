@@ -167,7 +167,7 @@ plot(fern_sf, pch = '.', axes = TRUE, col = "forestgreen")
 
 ## Computing the fractal dimension
 
-The fractal dimension is calculated for the self-affine Barnsley fern using `bcd.self_affinity()`.
+The fractal dimension is calculated for the Barnsley fern using `bcd()`.
 
 ```{r}
 bcd(fern_sf, seq(0.1, 1, 0.1), plot = TRUE)
