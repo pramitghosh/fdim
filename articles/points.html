@@ -234,10 +234,9 @@ self-affine transformations are often applied to the component copies by
 a function system with finite number of contraction mappings. Formally,
 the IFS is usually expressed using a Hutchinson operator. Let <span class="math inline">\(\{f_i\colon X\to X\mid1\le i\le N\}\)</span> be an
 IFS - i.e. a set of contractions on set <span class="math inline">\(X\)</span> to itself. Then the operator <span class="math inline">\(H\)</span> is defined over subsets <span class="math inline">\(S\subset X\)</span> as <span class="math display">\[H(S)=\bigcup\limits_{i=1}^{N}f_i(S)\]</span>.</p>
-</div>
-<div class="section level4">
-<h4 id="generating-the-fern-programmatically">Generating the fern programmatically<a class="anchor" aria-label="anchor" href="#generating-the-fern-programmatically"></a>
-</h4>
+<div class="section level5">
+<h5 id="generating-the-fern-programmatically">Generating the fern programmatically<a class="anchor" aria-label="anchor" href="#generating-the-fern-programmatically"></a>
+</h5>
 <p>The finite set of affine transformations are applied stochastically
 depending on its influence on the generation of the fern.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -292,10 +291,9 @@ depending on its influence on the generation of the fern.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fern_sf</span>, pch <span class="op">=</span> <span class="st">'.'</span>, axes <span class="op">=</span> <span class="cn">TRUE</span>, col <span class="op">=</span> <span class="st">"forestgreen"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="points_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 </div>
-</div>
-<div class="section level3">
-<h3 id="computing-the-fractal-dimension">Computing the fractal dimension<a class="anchor" aria-label="anchor" href="#computing-the-fractal-dimension"></a>
-</h3>
+<div class="section level5">
+<h5 id="computing-the-fractal-dimension">Computing the fractal dimension<a class="anchor" aria-label="anchor" href="#computing-the-fractal-dimension"></a>
+</h5>
 <p>The fractal dimension is calculated for the Barnsley fern using
 <code><a href="../reference/bcd.html">bcd()</a></code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -307,6 +305,8 @@ depending on its influence on the generation of the fern.</p>
 <p><img src="points_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
 <pre><code><span><span class="co">#&gt; Plotting best-fit line...</span></span>
 <span><span class="co">#&gt; [1] 1.761826</span></span></code></pre>
+</div>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
