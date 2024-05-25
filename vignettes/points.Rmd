@@ -51,7 +51,7 @@ plot(st_geometry(two_points), axes = TRUE)
 
 The Box-Counting dimension of this simple feature can be calculated as follows
 ```{r fig.height=5, fig.width=7}
-bcd(two_points, l = seq(0.1, 1, 0.1), plot = TRUE)
+bcd(two_points, type = "self_similarity", l = seq(0.1, 1, 0.1), plot = TRUE)
 ```
 The linear regression gives a perfectly horizontal best-fit line indicating a Box-Counting dimension of 0, as expected.
 
@@ -103,6 +103,72 @@ plot(sierpinski_sf, axes = TRUE)
 
 The Box-Counting Dimension of this figure is calculated using `bcd()` as illustrated below.
 ```{r fig.height=5, fig.width=7}
-bcd(sierpinski_sf, l = seq(0.01, 0.1, 0.01), plot = TRUE)
+bcd(sierpinski_sf, type = "self_similarity", l = seq(0.01, 0.1, 0.01), plot = TRUE)
 ```
 The regression gives a Box-Counting dimension of ~1.59 which is very close to the theoretical value.
+
+## Other Fractals
+
+### Barnsley fern
+
+Barnsley fern is a well-known fractal that was first described by a British mathematician, Michael Barnsley, in 1993. A Barnsley fern is constructed mathematically using a Iterated function system (IFS), a common method to generate fractals.
+
+In an IFS, a fractal is constructed iteratively as the union of several copies of itself. Before performing the union of the set, self-affine transformations are often applied to the component copies by a function system with finite number of contraction mappings. Formally, the IFS is usually expressed using a Hutchinson operator. Let $\{f_i\colon X\to X\mid1\le i\le N\}$ be an IFS - i.e. a set of contractions on set $X$ to itself. Then the operator $H$ is defined over subsets $S\subset X$ as $$H(S)=\bigcup\limits_{i=1}^{N}f_i(S)$$.
+
+#### Generating the fern programmatically
+
+The finite set of affine transformations are applied stochastically depending on its influence on the generation of the fern.
+
+```{r}
+barnsley_ifs = function(x, y)
+{
+  xn = 0
+  yn = 0
+  
+  r = runif(1)
+  
+  if(r < 0.01)
+  {
+    xn = 0.0
+    yn = 0.16 * y
+  } else
+    if(r < 0.86)
+    {
+      xn = 0.85 * x + 0.04 * y
+      yn = -0.04 * x + 0.85 * y + 1.6
+    } else
+      if(r < 0.93)
+      {
+        xn = 0.2 * x - 0.26 * y
+        yn = 0.23 * x + 0.22 * y + 1.6
+      } else
+      {
+        xn = -0.15 * x + 0.28 * y
+        yn = 0.26 * x + 0.24 * y + 0.44
+      }
+  
+  return(c(xn, yn))
+}
+
+max_iterations = 20000
+fern = list()
+fern[[1]] = c(0, 0)
+
+for(i in 1:max_iterations)
+{
+  fern[[i+1]] = barnsley_ifs(fern[[i]][1], fern[[i]][2])
+}
+
+fern_pts = matrix(unlist(fern), ncol = 2, byrow = TRUE)
+(fern_sf = st_sf(st_sfc(st_multipoint(fern_pts), crs = 3857)))
+plot(fern_sf, pch = '.', axes = TRUE, col = "forestgreen")
+
+```
+
+#### Computing the fractal dimension
+
+The fractal dimension is calculated for the Barnsley fern using `bcd()`.
+
+```{r}
+bcd(fern_sf, type = "self_similarity", seq(0.1, 1, 0.1), plot = TRUE)
+```

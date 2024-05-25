@@ -22,7 +22,7 @@ import_sf = function(dsn, layer, ...)
 
 #' Create grids for polygons supplied as arguments
 #' @param f The sf object based on which the grid will be created
-#' @param cs The cell size of the grid that is to be created. This will be set as the cell width in both x- and y-directions
+#' @param cs The cell size of the grid that is to be created. This will be set as the side-length in x- and y-directions
 #' @importFrom sf st_make_grid
 #' @return An object of class `sfc` with square polygons
 overlay_grid = function(cs, f)
@@ -94,7 +94,7 @@ import_SVD = function(x = NULL, dsn, layer, ...)
 plot_slope = function(bcd_matrix, bcd_lm)
 {
   cat("Plotting requested...\n")
-  plot(bcd_matrix, ylab = "log(Number of boxes needed to cover)", xlab = "-log(Length of a side of the square box)", main = "Box-Counting Dimension")
+  plot(bcd_matrix, ylab = "log(Number of boxes needed to cover)", xlab = "-log(Length of a side of the box)", main = "Box-Counting Dimension")
   
   cat("Plotting least-squares regression line...\n")
   abline(reg = bcd_lm, col = "blue", lty = 2)
@@ -105,4 +105,3 @@ calc_slope = function(bcd_lm)
 {
   as.numeric(coef(bcd_lm))[2]
 }
-

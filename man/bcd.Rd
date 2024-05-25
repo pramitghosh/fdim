@@ -6,21 +6,23 @@
 \alias{bcd.self_affinity}
 \title{Calculates the box-counting dimension of a polygon}
 \usage{
-bcd(k, l = seq(10000, 1e+05, 10000), plot = FALSE)
+bcd(k, type, l = seq(10000, 1e+05, 10000), plot = FALSE)
 
-\method{bcd}{self_similarity}(k, l = seq(10000, 1e+05, 10000), plot = FALSE)
+\method{bcd}{self_similarity}(k, type = "self_similarity", l = seq(10000, 1e+05, 10000), plot = FALSE)
 
-\method{bcd}{self_affinity}(k, l = matrix(rep(seq(10000, 1e+05, 10000), 2), ncol = 2), plot = FALSE)
+\method{bcd}{self_affinity}(k, type = "self_affinity", l = seq(10000, 1e+05, 10000), plot = FALSE)
 }
 \arguments{
 \item{k}{Spatial Vector data as an `sf` object}
 
-\item{l}{Numeric or matrix; represents sequence of cell side lengths that will be used to generate the grid. Numeric value represents the length of a side of a single square box of the grid to calculate self-similarity; matrix columns represents the length and width of rectangular cells for calculating self-affinity.}
+\item{type}{One of {self_similarity, self_affinity} that is to be calculated}
+
+\item{l}{Numeric; represents the length of a side of a single square box of the grid to calculate box-counting dimension}
 
 \item{plot}{Logical; if true, a log-log plot of the number of cells used to cover the polygon vs the cell size will be plotted}
 }
 \value{
-A numeric vector representing the box-counting dimension of the spatial feature, `k`.
+A numeric representing the box-counting dimension of the spatial feature, `k`.
 }
 \description{
 Calculates the box-counting dimension of a polygon
