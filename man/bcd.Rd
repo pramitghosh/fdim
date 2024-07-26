@@ -8,14 +8,14 @@
 \usage{
 bcd(k, type, l = seq(10000, 1e+05, 10000), plot = FALSE)
 
-\method{bcd}{self_similarity}(k, type = "self_similarity", l = seq(10000, 1e+05, 10000), plot = FALSE)
+\method{bcd}{self_similarity}(k, type = "s", l = seq(10000, 1e+05, 10000), plot = FALSE)
 
-\method{bcd}{self_affinity}(k, type = "self_affinity", l = seq(10000, 1e+05, 10000), plot = FALSE)
+\method{bcd}{self_affinity}(k, type = "a", l = seq(10000, 1e+05, 10000), plot = FALSE)
 }
 \arguments{
 \item{k}{Spatial Vector data as an `sf` object}
 
-\item{type}{One of {self_similarity, self_affinity} that is to be calculated}
+\item{type}{One of {'s', 'a'} (representing self-similarity and self-affinity respectively) that is to be calculated}
 
 \item{l}{Numeric; represents the length of a side of a single square box of the grid to calculate box-counting dimension}
 

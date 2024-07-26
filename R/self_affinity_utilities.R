@@ -1,22 +1,53 @@
 
 rot = function(a) matrix(c(cos(a), sin(a), -sin(a), cos(a)), 2, 2)
 
+#' Rotate sf geometry about its centroid
+#'
+#' @param sf_geom sf geometry object
+#' @param angle Angle (in radians) by which the geometry is to be rotated
+#' 
+#' @importFrom sf st_centroid
+#'
+#' @return sf geometry object rotated about its centroid by the desired angle
+#'
 rotate_about_centroid = function(sf_geom, angle)
 {
   ctrd = st_centroid(sf_geom)
   return((sf_geom - ctrd) * rot(angle) + ctrd)
 }
 
+#' Calculate extent along x-axis
+#'
+#' @param sf_geom sf geometry object whose extent along x-axis is to be calculated
+#' 
+#' @importFrom sf st_bbox
+#'
+#' @return Length of the extent along x-axis
+#'
 x_extent = function(sf_geom)
 {
   return(st_bbox(sf_geom)[3] - st_bbox(sf_geom)[1])
 }
 
+#' Calculate extent along y-axis
+#'
+#' @param sf_geom sf geometry object whose extent along y-axis is to be calculated
+#' 
+#' @importFrom sf st_bbox
+#'
+#' @return Length of the extent along y-axis
+#'
 y_extent = function(sf_geom)
 {
   return(st_bbox(sf_geom)[4] - st_bbox(sf_geom)[2])
 }
 
+#' Rotates geometry so that maximum possible extent lies along x-axis
+#'
+#' @param sf_geom sf geometry object whose extent is to be maximized along x-axis
+#'
+#' @return Rotated sf geometry object such that its maximum possible extent is along x-axis
+#'
 find_max_extent = function(sf_geom)
 {
   max_length = 0

@@ -14,7 +14,7 @@ test_that(desc = "Cell counts",
 
 test_that(desc = "Box-Counting Dimension",
             {
-              expect_lt(abs((import_SVD(dsn = system.file(package = "sameSVD"), layer = "madhya_pradesh") %>% bcd(type = "self_similarity")) - 1.834641), 1/1000000)
+              expect_lt(abs((import_SVD(dsn = system.file(package = "sameSVD"), layer = "madhya_pradesh") %>% bcd(type = "s")) - 1.834641), 1/1000000)
             }
           )
 
