@@ -51,7 +51,7 @@ plot(st_geometry(two_points), axes = TRUE)
 
 The Box-Counting dimension of this simple feature can be calculated as follows
 ```{r fig.height=5, fig.width=7}
-bcd(two_points, l = seq(0.1, 1, 0.1), plot = TRUE)
+bcd(two_points, type = "s", l = seq(0.1, 1, 0.1), plot = TRUE)
 ```
 The linear regression gives a perfectly horizontal best-fit line indicating a Box-Counting dimension of 0, as expected.
 
@@ -103,7 +103,7 @@ plot(sierpinski_sf, pch = '.', axes = TRUE)
 
 The Box-Counting Dimension of this figure is calculated using `bcd()` as illustrated below.
 ```{r fig.height=5, fig.width=7}
-bcd(sierpinski_sf, l = seq(0.01, 0.1, 0.01), plot = TRUE)
+bcd(sierpinski_sf, type = "s", l = seq(0.01, 0.1, 0.01), plot = TRUE)
 ```
 The regression gives a Box-Counting dimension of ~1.59 which is very close to the theoretical value.
 
@@ -170,5 +170,5 @@ plot(fern_sf, pch = '.', axes = TRUE, col = "forestgreen")
 The fractal dimension is calculated for the Barnsley fern using `bcd()`.
 
 ```{r}
-bcd(fern_sf, seq(0.1, 1, 0.1), plot = TRUE)
+bcd(fern_sf, type = "s", seq(0.1, 1, 0.1), plot = TRUE)
 ```

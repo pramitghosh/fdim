@@ -44,24 +44,12 @@ count_cells = function(grid, f)
 generate_matrix = function(l, k, dimension = 1)
 {
   cat("Generating grids...\n")
-  mode = if(inherits(l, "numeric")) "ss" else
-            if(inherits(l, "matrix")) "sa"
-  
-  if(mode == "ss")
-    grids = lapply(as.list(l), overlay_grid, k)
-  else if(mode == "sa")
-  {
-    cs_list = lapply(1:nrow(l), function(x) l[x,])
-    grids = lapply(cs_list, overlay_grid, k)
-  }
+  grids = lapply(as.list(l), overlay_grid, k)
   
   cat("Counting intersecting cells...\n")
   int_grids = lapply(grids, count_cells, k)
   
-  if(mode == "ss")
-    bcd_matrix = log(cbind(1/l, as.numeric(int_grids)))
-  else if(mode == "sa")
-    bcd_matrix = log(cbind(1/l[, dimension], as.numeric(int_grids)))
+  bcd_matrix = log(cbind(1/l, as.numeric(int_grids)))
   
   class(bcd_matrix) = c(class(bcd_matrix), "bcd_matrix")
   return(bcd_matrix)
@@ -108,7 +96,7 @@ plot_slope = function(bcd_matrix, bcd_lm)
   cat("Plotting requested...\n")
   plot(bcd_matrix, ylab = "log(Number of boxes needed to cover)", xlab = "-log(Length of a side of the box)", main = "Box-Counting Dimension")
   
-  cat("Plotting best-fit line...\n")
+  cat("Plotting least-squares regression line...\n")
   abline(reg = bcd_lm, col = "blue", lty = 2)
 }
 
@@ -116,19 +104,4 @@ plot_slope = function(bcd_matrix, bcd_lm)
 calc_slope = function(bcd_lm)
 {
   as.numeric(coef(bcd_lm))[2]
-}
-
-calc_anisotropy = function(scaling_exponents)
-{
-  if(length(scaling_exponents) != 2)
-  {
-    print("Expected scaling exponents for two directions!")
-    return(FALSE)
-  }
-  
-  # Assuming v_x > v_y
-  cat(paste('v_x = ', max(scaling_exponents), '\n'))
-  cat(paste('v_y = ', min(scaling_exponents), '\n'))
-  
-  return(max(scaling_exponents)/min(scaling_exponents))
 }

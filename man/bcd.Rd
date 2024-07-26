@@ -6,44 +6,28 @@
 \alias{bcd.self_affinity}
 \title{Calculates the box-counting dimension of a polygon}
 \usage{
-bcd(k, l, plot, ...)
+bcd(k, type, l = seq(10000, 1e+05, 10000), plot = FALSE)
 
-\method{bcd}{self_similarity}(k, l = seq(10000, 1e+05, 10000), plot = FALSE, ...)
+\method{bcd}{self_similarity}(k, type = "s", l = seq(10000, 1e+05, 10000), plot = FALSE)
 
-\method{bcd}{self_affinity}(
-  k,
-  l = matrix(rep(seq(10000, 1e+05, 10000), 2), ncol = 2),
-  plot = FALSE,
-  anisotropy = 1.25,
-  affine_local = FALSE,
-  ...
-)
+\method{bcd}{self_affinity}(k, type = "a", l = seq(10000, 1e+05, 10000), plot = FALSE)
 }
 \arguments{
 \item{k}{Spatial Vector data as an `sf` object}
 
-\item{l}{Numeric or matrix; represents sequence of cell side lengths that will be used to generate the grid. Numeric value represents the length of a side of a single square box of the grid to calculate self-similarity; matrix columns represents the length and width of rectangular cells for calculating self-affinity.}
+\item{type}{One of {'s', 'a'} (representing self-similarity and self-affinity respectively) that is to be calculated}
+
+\item{l}{Numeric; represents the length of a side of a single square box of the grid to calculate box-counting dimension}
 
 \item{plot}{Logical; if true, a log-log plot of the number of cells used to cover the polygon vs the cell size will be plotted}
-
-\item{...}{Arguments `anisotropy` and `affine_local` passed on to `bcd.self_affinity()`}
-
-\item{anisotropy}{Ratio of directional scaling exponents `v_x/v_y` (`v_x > v_y`) beyond which the feature will be considered to exhibit self-affinity}
-
-\item{affine_local}{Whether local self-affine fractal dimension is to be calculated}
 }
 \value{
-A numeric vector representing the box-counting dimension of the spatial feature, `k`.
+A numeric representing the box-counting dimension of the spatial feature, `k`.
 }
 \description{
-Calculates the self-similar or self-affine fractal dimension. If argument `l` is a numeric vector, self-similarity is calculated. If it is a matrix, then self-affinity is calculated and returns the global self-affine fractal dimension. If `affine_local` is set to `TRUE`, then global and local self-affine fractal dimensions are returned.
-}
-\examples{
-import_SVD(rnaturalearth::ne_countries(scale = "medium", country = "Nepal", returnclass = "sf")) |>
-bcd(l = seq(10000, 100000, 15000), plot = TRUE)
+Calculates the box-counting dimension of a polygon
 
-rnaturalearth::ne_countries(scale = "medium", country = "Ukraine", returnclass = "sf") |>
-import_SVD() |>
-bcd(l = matrix(rep(seq(10000, 100000, 10000), 2), ncol = 2), affine_local = TRUE, plot = TRUE)
+Calculates self-similar box-counting dimensions
 
+Calculates self-affine box-counting dimensions
 }
