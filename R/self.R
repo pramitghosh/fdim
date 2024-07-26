@@ -16,7 +16,8 @@ bcd = function(k, type, l = seq(10000, 100000, 10000), plot = FALSE)
     class(k) = c("self_affinity", class(k))
   UseMethod("bcd", k)
 }
-  
+
+#' Calculates self-similar box-counting dimensions  
 #' @name bcd
 #' @export
 bcd.self_similarity = function(k, type = "s", l = seq(10000, 100000, 10000), plot = FALSE)
@@ -27,7 +28,8 @@ bcd.self_similarity = function(k, type = "s", l = seq(10000, 100000, 10000), plo
   return(calc_slope(bcd_lm))
 }
 
-
+#' Calculates self-affine box-counting dimensions
+#'
 #' @name bcd
 #' @importFrom sf st_geometry
 #' @export
@@ -38,3 +40,4 @@ bcd.self_affinity = function(k, type = "a", l = seq(10000, 100000, 10000), plot 
   
   return(bcd(k_scaled_geom, type = 's', l, plot))
 }
+

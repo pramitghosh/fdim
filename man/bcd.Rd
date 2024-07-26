@@ -26,4 +26,8 @@ A numeric representing the box-counting dimension of the spatial feature, `k`.
 }
 \description{
 Calculates the box-counting dimension of a polygon
+
+Calculates self-similar box-counting dimensions
+
+Calculates self-affine box-counting dimensions
 }
