@@ -33,10 +33,6 @@ bcd.self_similarity = function(k, type = "s", l = seq(10000, 100000, 10000), plo
 #' @export
 bcd.self_affinity = function(k, type = "a", l = seq(10000, 100000, 10000), plot = FALSE)
 {
-  # Find correct rotation angle to have the longest length on the x-axis
-  # and rotate the feature accordingly
-  
-  # Scale the x-dimension to have the same extent as the y-dimension
   k_rotated_geom = find_max_extent(st_geometry(k))
   k_scaled_geom = scale_x(k_rotated_geom)
   
