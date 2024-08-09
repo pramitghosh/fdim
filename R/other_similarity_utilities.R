@@ -76,7 +76,7 @@ shifter = function(x, n = 1)
 }
 
 
-turning_angle = function(p_coords, plot = TRUE, ...)
+turning_angle = function(p_coords)
 {
   x = cumsum(poly_distances(p_coords))
   
@@ -110,11 +110,11 @@ plot_TA = function(p, ylim = NULL, col = "black", add = FALSE)
 }
 
 
-diff_auc = function(x_vals, y1_vals, y2_vals, false_offset = min(c(y1_vals, y2_vals)) + 1)
+diff_auc = function(x1_vals, x2_vals = x1_vals, y1_vals, y2_vals, false_offset = min(c(y1_vals, y2_vals)) + 1)
 {
   # print(false_offset)
-  a1 = AUC(x_vals, y1_vals + false_offset, method = "step")
-  a2 = AUC(x_vals, y2_vals + false_offset, method = "step")
+  a1 = AUC(x1_vals, y1_vals + false_offset, method = "step")
+  a2 = AUC(x2_vals, y2_vals + false_offset, method = "step")
   return(abs(a1 - a2))
 }
 
@@ -131,22 +131,16 @@ merge_x_fill_y = function(p1_TA, p2_TA)
   return(harmonised_df)
 }
 
-dist_TA = function(p1, p2, plot = TRUE)
+dist_TA = function(p1, p2, p1_theta)
 {
   p1_TA = turning_angle(p1)
   p2_TA = turning_angle(p2)
   
-  if(plot)
-  {
-    y_range = c(min(p1_TA$py, p2_TA$py), max(p1_TA$py, p2_TA$py))
-    # par(mfrow = c(2, 1))
-    plot_TA(p1_TA, col = "red", ylim = y_range)
-    plot_TA(p2_TA, col = "blue", add = TRUE)
-    # par(mfrow = c(1, 1))
-  }
+  p1_TA$py = p1_TA$py + p1_theta
   
   harmonised_df = merge_x_fill_y(p1_TA, p2_TA)
   
-  dist = diff_auc(harmonised_df$x_vals, harmonised_df$y1_vals, harmonised_df$y2_vals)
-  return(dist)
+  dist = diff_auc(x1_vals = harmonised_df$x_vals, y1_vals = harmonised_df$y1_vals, y2_vals = harmonised_df$y2_vals)
+  
+  return(list(dist = dist, p1_TA = p1_TA, p2_TA = p2_TA))
 }
