@@ -3,7 +3,7 @@
 #' @param l Numeric; represents the length of a side of a single square box of the grid to calculate box-counting dimension
 #' @param plot Logical; if true, a log-log plot of the number of cells used to cover the polygon vs the cell size will be plotted
 #' @param k Spatial Vector data as an `sf` object
-#' @param type One of {'s', 'a'} (representing self-similarity and self-affinity respectively) that is to be calculated
+#' @param type One of 's' or 'a' (representing self-similarity and self-affinity respectively) that is to be calculated
 #' 
 #' @return A numeric representing the box-counting dimension of the spatial feature, `k`.
 #' @name bcd
