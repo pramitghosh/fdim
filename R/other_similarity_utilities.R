@@ -120,19 +120,19 @@ diff_auc = function(x1_vals, x2_vals = x1_vals, y1_vals, y2_vals, false_offset =
 {
   if(false_offset < 0)
   {
-    false_offset = 1 - false_offset
+    false_offset = -false_offset + 1
   } else
   {
     false_offset = 0
   }
   
-  # print(false_offset)
-  a1 = AUC(x1_vals, y1_vals + false_offset, method = "step")
-  a2 = AUC(x2_vals, y2_vals + false_offset, method = "step")
-  # print(paste("a1 = ", a1, ", a2 = ", a2))
-  return(abs(a1 - a2))
+  # # print(false_offset)
+  # a1 = AUC(x1_vals, y1_vals + false_offset, method = "step")
+  # a2 = AUC(x2_vals, y2_vals + false_offset, method = "step")
+  # # print(paste("a1 = ", a1, ", a2 = ", a2))
+  # return(abs(a1 - a2))
   
-  # AUC(x1_vals, abs(y2_vals - y1_vals))
+  AUC(x1_vals, abs(y2_vals - y1_vals), method = "step")
 }
 
 merge_x_fill_y = function(p1_TA, p2_TA)
@@ -151,7 +151,7 @@ merge_x_fill_y = function(p1_TA, p2_TA)
       flag = FALSE
       row_num = duplicated_xs[i]
       df_subset = merged_df[row_num:(row_num+1), c('y1_vals', 'y2_vals')]
-      
+
       if(is.na(df_subset[1,1]) && is.na(df_subset[2,2]) && abs(df_subset[1,2] - df_subset[2,1]) < 1e-10)
       {
         merged_df$x_vals[row_num] = -1
@@ -173,11 +173,6 @@ merge_x_fill_y = function(p1_TA, p2_TA)
 
 dist_TA = function(p1, p2, p1_theta)
 {
-  if(p1_theta < 1e-10)
-  {
-    p1_theta = 0
-  }
-  
   p1_TA = turning_angle(p1)
   p2_TA = turning_angle(p2)
   
