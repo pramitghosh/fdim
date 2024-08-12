@@ -22,7 +22,7 @@ similarity = function(p1, p2, plot = TRUE)
   p1_TA = as.data.frame(turning_angle(p1_coords))
   p2_TA = as.data.frame(turning_angle(p2_coords))
   
-  alpha = diff_auc(p2_TA$px, p1_TA$px, p2_TA$py, p1_TA$py)
+  alpha = diff_auc(p2_TA$px, p1_TA$px, p2_TA$py, p1_TA$py, unequal = TRUE)
   
   min_config = list(dist = -1)
   

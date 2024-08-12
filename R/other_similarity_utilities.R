@@ -116,7 +116,7 @@ plot_TA = function(p, ylim = NULL, col = "black", add = FALSE)
 }
 
 
-diff_auc = function(x1_vals, x2_vals = x1_vals, y1_vals, y2_vals, false_offset = min(c(y1_vals, y2_vals)))
+diff_auc = function(x1_vals, x2_vals = x1_vals, y1_vals, y2_vals, unequal = FALSE, false_offset = min(c(y1_vals, y2_vals)))
 {
   if(false_offset < 0)
   {
@@ -126,11 +126,14 @@ diff_auc = function(x1_vals, x2_vals = x1_vals, y1_vals, y2_vals, false_offset =
     false_offset = 0
   }
   
-  # # print(false_offset)
-  # a1 = AUC(x1_vals, y1_vals + false_offset, method = "step")
-  # a2 = AUC(x2_vals, y2_vals + false_offset, method = "step")
-  # # print(paste("a1 = ", a1, ", a2 = ", a2))
-  # return(abs(a1 - a2))
+  if(unequal)
+  {
+    # print(false_offset)
+    a1 = AUC(x1_vals, y1_vals + false_offset, method = "step")
+    a2 = AUC(x2_vals, y2_vals + false_offset, method = "step")
+    # print(paste("a1 = ", a1, ", a2 = ", a2))
+    return(abs(a1 - a2))
+  }
   
   AUC(x1_vals, abs(y2_vals - y1_vals), method = "step")
 }
