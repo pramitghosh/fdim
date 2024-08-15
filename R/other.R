@@ -1,5 +1,5 @@
 
-similarity = function(p1, p2, plot = TRUE)
+similarity_polygon = function(p1, p2, plot = TRUE)
 {
   if(is.na(st_crs(p1)))
   {
@@ -76,6 +76,56 @@ similarity = function(p1, p2, plot = TRUE)
   all_points_df = t(as.data.frame(all_points))
   rownames(all_points_df) = 1:nrow(all_points_df)
   min_config = append(min_config, list(df = all_points_df))
+  
+  return(min_config)
+}
+
+
+similarity_linestring = function(l1, l2, plot = TRUE)
+{
+  if(is.na(st_crs(l1)))
+  {
+    l1_coords = st_coordinates(l1)
+  } else
+  {
+    l1_coords = st_transform(l1, crs = 32642) |> st_coordinates()
+  }
+  
+  if(is.na(st_crs(l2)))
+  {
+    l2_coords = st_coordinates(l2)
+  } else
+  {
+    l2_coords = st_transform(l2, crs = 32642) |> st_coordinates()
+  }
+  
+  l1_rev_coords = l1_coords[nrow(l1_coords):1, ]
+  l2_rev_coords = l2_coords[nrow(l2_coords):1, ]
+  
+  # l1_TA = as.data.frame(turning_angle(l1_coords, type = 'linestring'))
+  # l2_TA = as.data.frame(turning_angle(l2_coords, type = 'linestring'))
+  
+  dist_objs = vector(mode = "list", length = 3)
+  names(dist_objs) = c('oo', 'or', 'ro')#, 'rr')
+  dist_objs[[1]] = (dist_TA(l1_coords, l2_coords, type = 'linestring'))
+  dist_objs[[2]] = (dist_TA(l1_coords, l2_rev_coords, type = 'linestring'))
+  dist_objs[[3]] = (dist_TA(l1_rev_coords, l2_coords, type = 'linestring'))
+  # dist_objs[[4]] = (dist_TA(l1_rev_coords, l2_rev_coords, type = 'linestring'))
+  
+  dists = unlist(lapply(dist_objs, function(x) x$dist))
+  min_config = dist_objs[[which.min(dists)]]
+  
+  if(plot)
+  {
+    p1_TA = as.data.frame(min_config$p1_TA)
+    p2_TA = as.data.frame(min_config$p2_TA)
+    
+    y_range = c(min(p1_TA$py, p2_TA$py), max(p1_TA$py, p2_TA$py))
+    # par(mfrow = c(2, 1))
+    plot_TA(p1_TA, col = "red", ylim = y_range)
+    plot_TA(p2_TA, col = "blue", add = TRUE)
+    # par(mfrow = c(1, 1))
+  }
   
   return(min_config)
 }
