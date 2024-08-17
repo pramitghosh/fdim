@@ -13,7 +13,7 @@
 #' @examples
 #' bhutan = rnaturalearth::ne_countries(country = "bhutan", scale = "medium")
 #' switzerland = rnaturalearth::ne_countries(country = "switzerland", scale = "medium")
-#' similarity_polygon(bhutan, switzerland)$dist
+#' similarity_polygon(bhutan, switzerland, plot = FALSE)$dist
 #' 
 similarity_polygon = function(p1, p2, plot = TRUE)
 {
@@ -111,7 +111,7 @@ similarity_polygon = function(p1, p2, plot = TRUE)
 #' @examples
 #' l1 = sf::st_sf(sf::st_sfc(sf::st_linestring(cbind(1:100, sin(sort(runif(100)*10))))))
 #' l2 = sf::st_sf(sf::st_sfc(sf::st_linestring(cbind(1:100, cos(sort(runif(100)*10))))))
-#' similarity_linestring(l1, l2)$dist
+#' similarity_linestring(l1, l2, plot = FALSE)$dist
 #' 
 similarity_linestring = function(l1, l2, plot = TRUE)
 {
