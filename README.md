@@ -1,8 +1,6 @@
 # sameSVD
 
-![R-CMD-check](https://github.com/pramitghosh/sameSVD/workflows/R-CMD-check/badge.svg) 
-[![pkgdown](https://github.com/pramitghosh/sameSVD/workflows/pkgdown/badge.svg)](https://pramitghosh.github.io/sameSVD) 
-[![codecov](https://codecov.io/gh/pramitghosh/sameSVD/branch/master/graph/badge.svg)](https://codecov.io/gh/pramitghosh/sameSVD) 
+![R-CMD-check](https://github.com/pramitghosh/sameSVD/workflows/R-CMD-check/badge.svg) [![pkgdown](https://github.com/pramitghosh/sameSVD/workflows/pkgdown/badge.svg)](https://pramitghosh.github.io/sameSVD) [![codecov](https://codecov.io/gh/pramitghosh/sameSVD/branch/master/graph/badge.svg)](https://codecov.io/gh/pramitghosh/sameSVD)
 
 Author: Pramit Ghosh
 
@@ -16,11 +14,10 @@ The objective of this package is to establish (if required) and implement measur
 
 ### Present Status
 
-|  | Similarity | Affinity |
-|--------|-----------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Self | - `*POINT` [done]<br>- `*LINESTRING` [done]<br>- `*POLYGON` [done] | - `*POINT` [not implemented yet]<br>- `*LINESTRING` [not implemented yet]<br>- `*POLYGON` [not implemented yet]<br><br>*to be implemented using box-counting dimension* |
-| Others | - `*POINT` [?]<br>- `LINESTRING` [turning angles]<br>- `POLYGON` [turning angles]<br>- `MULTILINESTRING` [?]<br>- `MULTIPOLYGON` [?] | - `*POINT` [?]<br>- `*LINESTRING` [?]<br>- `*POLYGON` [?]<br><br>*need suitable algorithms to implement* |
-
+|        | Similarity                                                                                                        | Affinity                                                                                                  |
+|-------------|----------------------|-------------------------------------|
+| Self   | \- `*POINT` [done]<br>- `*LINESTRING` [done]<br>- `*POLYGON` [done]                                               | \- `*POINT` [done]<br>- `*LINESTRING` [done]<br>- `*POLYGON` [done]                                       |
+| Others | \- ~~`*POINT`~~<br>- `LINESTRING` [done]<br>- `POLYGON` [done]<br>- `MULTILINESTRING` [?]<br>- `MULTIPOLYGON` [?] | \- `*POINT` [?]<br>- `*LINESTRING` [?]<br>- `*POLYGON` [?]<br><br>*need suitable algorithms to implement* |
 
 ## Installation
 
@@ -28,24 +25,28 @@ The objective of this package is to establish (if required) and implement measur
 
 In order to install this package, the following packages are required as a pre-requisite.
 
-- `sf`
+-   `sf`
+-   `DescTools`
+-   `tidyr`
+-   `trajr`
 
 In addition, the following packages are also suggested. These are mostly required to knit the vignettes and run certain tests.
 
-- `rnaturalearth`
-- `rnaturalearthdata`
-- `rgeos`
+-   `rnaturalearth`
+-   `rnaturalearthdata`
+-   `rgeos`
 
 These can be installed by running the following command in R:
 
-```r
-install.packages(c("sf", "rnaturalearth", "rnaturalearthdata", "rgeos"))
+``` r
+install.packages(c("sf", "DescTools", "tidyr", "trajr", "rnaturalearth", "rnaturalearthdata", "rgeos"))
 ```
+
 ### Installing `sameSVD`
 
 This package can be installed as follows
 
-```r
+``` r
 install.packages("remotes")
 library(remotes)
 install_github("pramitghosh/sameSVD")
@@ -55,7 +56,7 @@ install_github("pramitghosh/sameSVD")
 
 The Box-Counting dimension can be calculated using `bcd()`. The following example illustrates the usage.
 
-```r
+``` r
 library(sameSVD)
 library(rnaturalearth)
 deutschland = ne_countries(scale = "medium", country = "Germany", returnclass = "sf")
