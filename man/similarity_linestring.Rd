@@ -22,6 +22,6 @@ Calculates similarity as a metric between two linestrings
 \examples{
 l1 = sf::st_sf(sf::st_sfc(sf::st_linestring(cbind(1:100, sin(sort(runif(100)*10))))))
 l2 = sf::st_sf(sf::st_sfc(sf::st_linestring(cbind(1:100, cos(sort(runif(100)*10))))))
-similarity_linestring(l1, l2)$dist
+similarity_linestring(l1, l2, plot = FALSE)$dist
 
 }

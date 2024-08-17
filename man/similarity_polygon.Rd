@@ -22,6 +22,6 @@ Calculates similarity as a metric between two simple polygons
 \examples{
 bhutan = rnaturalearth::ne_countries(country = "bhutan", scale = "medium")
 switzerland = rnaturalearth::ne_countries(country = "switzerland", scale = "medium")
-similarity_polygon(bhutan, switzerland)$dist
+similarity_polygon(bhutan, switzerland, plot = FALSE)$dist
 
 }
