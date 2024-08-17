@@ -1,4 +1,20 @@
 
+#' Calculates similarity as a metric between two simple polygons
+#'
+#' @param p1 1st Polygon as a simple feature, as an `sf` object
+#' @param p2 2nd Polygon as a simple feature, as an `sf` object
+#' @param plot Whether to plot the turning angles
+#'
+#' @return Similarity value along with the configuration for which this was obtained
+#' @export
+#' 
+#' @importFrom sf st_crs st_coordinates st_transform
+#' 
+#' @examples
+#' bhutan = rnaturalearth::ne_countries(country = "bhutan", scale = "medium")
+#' switzerland = rnaturalearth::ne_countries(country = "switzerland", scale = "medium")
+#' similarity_polygon(bhutan, switzerland)$dist
+#' 
 similarity_polygon = function(p1, p2, plot = TRUE)
 {
   if(is.na(st_crs(p1)))
@@ -81,6 +97,22 @@ similarity_polygon = function(p1, p2, plot = TRUE)
 }
 
 
+#' Calculates similarity as a metric between two linestrings
+#'
+#' @param l1 1st Linestring as a simple feature, as an `sf` object
+#' @param l2 2nd Linestring as a simple feature, as an `sf` object
+#' @param plot Whether to plot the turning angles
+#'
+#' @return Similarity value along with the configuration for which this was obtained
+#' @export
+#' 
+#' @importFrom sf st_crs st_coordinates st_transform st_sfc st_sf st_linestring
+#'
+#' @examples
+#' l1 = sf::st_sf(sf::st_sfc(sf::st_linestring(cbind(1:100, sin(sort(runif(100)*10))))))
+#' l2 = sf::st_sf(sf::st_sfc(sf::st_linestring(cbind(1:100, cos(sort(runif(100)*10))))))
+#' similarity_linestring(l1, l2)$dist
+#' 
 similarity_linestring = function(l1, l2, plot = TRUE)
 {
   if(is.na(st_crs(l1)))

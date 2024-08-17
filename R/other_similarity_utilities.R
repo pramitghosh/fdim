@@ -1,3 +1,11 @@
+#' Calculates turning angles for each vertex of a simple polygon or linestring
+#'
+#' @param p_coords Coordinates of vertices in matrix form, such as the one returned by `sf::st_coordinates()`
+#' @param type The type of feature: 'polygon' for simple polygons (default) or 'linestring' for linestrings
+#'
+#' @return Vector of turning angles in radians
+#' 
+#' @importFrom trajr TrajFromCoords TrajAngles
 poly_angles = function(p_coords, type = 'polygon')
 {
   coords_df = as.data.frame(p_coords)[c('X', 'Y')]
@@ -5,7 +13,7 @@ poly_angles = function(p_coords, type = 'polygon')
   if(type == 'polygon')
     coords_df = rbind(coords_df, coords_df[2, ])
   
-  TrajAngles(TrajFromCoords(coords_df))
+  trajr::TrajAngles(trajr::TrajFromCoords(coords_df))
 }
 
 # poly_angles_ls = function(p_coords)
@@ -16,6 +24,14 @@ poly_angles = function(p_coords, type = 'polygon')
 # }
 
 
+#' Calculates cumulative normalised distances between vertices of a simple polygon or linestring
+#'
+#' @param p_coords Coordinates of vertices in matrix form, such as the one returned by sf::st_coordinates()
+#' @param type The type of feature: 'polygon' for simple polygons (default) or 'linestring' for linestrings
+#' 
+#' @importFrom stats na.omit
+#'
+#' @return Vector of cumulative normalised distances in the units of `p_coords`
 poly_distances = function(p_coords, type = 'polygon')
 {
   coords_df = as.data.frame(p_coords)[c('X', 'Y')]
@@ -40,6 +56,14 @@ poly_distances = function(p_coords, type = 'polygon')
 }
 
 
+#' Circular shifting of a data frame by rows with identical first and last rows
+#'
+#' @param x Data frame with identical first and last rows
+#' @param n Step-size by which the shift is to be made; n = 1 by default
+#' 
+#' @importFrom utils head tail
+#'
+#' @return Data frame `x` with `n` rows shifted circularly and identical first and last rows
 shifter = function(x, n = 1)
 {
   x = x[1:dim(x)[1] - 1,]
@@ -48,6 +72,12 @@ shifter = function(x, n = 1)
 }
 
 
+#' Cumulative turning angles vs. cumulative normalised length of a simple polygon or linestring
+#'
+#' @param p_coords Coordinates of vertices in matrix form, such as the one returned by sf::st_coordinates()
+#' @param type The type of feature: 'polygon' for simple polygons (default) or 'linestring' for linestrings
+#'
+#' @return List of vectors `px` (cumulative normalised distances) and `py` (corresponding cumulative turning angles)
 turning_angle = function(p_coords, type = 'polygon')
 {
   x = cumsum(poly_distances(p_coords, type = type))
@@ -80,6 +110,14 @@ turning_angle = function(p_coords, type = 'polygon')
 # }
 
 
+#' Plots turning angles for vertices of a simple polygon or linestring
+#'
+#' @param p List of cumulative normalised distances (`px`) and cumulative turning angles (`py`), as returned by `turning_angle()`
+#' @param ylim The range of y-values that are to be plotted
+#' @param col The colour of the turning angles curve that is to be plotted
+#' @param add Whether to add to the existing plot
+#' 
+#' @importFrom graphics axis lines
 plot_TA = function(p, ylim = NULL, col = "black", add = FALSE)
 {
   x = p$px
@@ -97,6 +135,18 @@ plot_TA = function(p, ylim = NULL, col = "black", add = FALSE)
 }
 
 
+#' Calculates step-wise absolute difference between the area under two curves
+#'
+#' @param x1_vals x-values of the 1st curve
+#' @param x2_vals x-values of the 2nd curve (equal to `x1_vals` by default)
+#' @param y1_vals y-values of the 1st curve corresponding to `x1_vals`
+#' @param y2_vals y-values of the 2nd curve corresponding to `x2_vals`
+#' @param unequal whether the number of samples in the 1st and 2nd curves are unequal (default is `FALSE`)
+#' @param false_offset Minimum y-value in `y1_vals` and `y2_vals`
+#'
+#' @return Numeric value of the absolute difference between the area under the curves
+#'
+#' @importFrom DescTools AUC
 diff_auc = function(x1_vals, x2_vals = x1_vals, y1_vals, y2_vals, unequal = FALSE, false_offset = min(c(y1_vals, y2_vals)))
 {
   false_offset = min(c(y1_vals, y2_vals))
@@ -111,15 +161,24 @@ diff_auc = function(x1_vals, x2_vals = x1_vals, y1_vals, y2_vals, unequal = FALS
   if(unequal)
   {
     # print(false_offset)
-    a1 = AUC(x1_vals, y1_vals + false_offset, method = "step")
-    a2 = AUC(x2_vals, y2_vals + false_offset, method = "step")
+    a1 = DescTools::AUC(x1_vals, y1_vals + false_offset, method = "step")
+    a2 = DescTools::AUC(x2_vals, y2_vals + false_offset, method = "step")
     # print(paste("a1 = ", a1, ", a2 = ", a2))
     return(abs(a1 - a2))
   }
   
-  AUC(x1_vals, abs(y2_vals - y1_vals), method = "step")
+  DescTools::AUC(x1_vals, abs(y2_vals - y1_vals), method = "step")
 }
 
+#' Harmonise turning angles for two curves with identical x-values
+#'
+#' @param p1_TA Turning angles of the 1st curve
+#' @param p2_TA Turning angles of the 2nd curve
+#' @param threshold Small positive value (default `1e-10`) such that differences lesser than this is ignored
+#'
+#' @return Data frame with cumulative turning angles for the two curves against identical x-values
+#'
+#' @importFrom tidyr fill
 merge_x_fill_y = function(p1_TA, p2_TA, threshold = 1e-10)
 {
   df1 = as.data.frame(p1_TA)
@@ -156,6 +215,14 @@ merge_x_fill_y = function(p1_TA, p2_TA, threshold = 1e-10)
   return(harmonised_df)
 }
 
+#' Calculates distance between two simple polygons or linestrings
+#'
+#' @param p1 Coordinates of vertices of the 1st feature in matrix form, such as the one returned by sf::st_coordinates()
+#' @param p2 Coordinates of vertices of the 2nd feature in matrix form, such as the one returned by sf::st_coordinates()
+#' @param p1_theta Angle of rotation in radians for which the distance is minimum (default is 0)
+#' @param type The type of feature: 'polygon' for simple polygons (default) or 'linestring' for linestrings
+#'
+#' @return List containing numeric distance, turning angles with appropriate starting coordinates, harmonised data frame of turning angles with identical x values
 dist_TA = function(p1, p2, p1_theta = 0, type = 'polygon')
 {
   p1_TA = turning_angle(p1, type = type)

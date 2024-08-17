@@ -14,7 +14,10 @@ RoxygenNote: 7.3.1
 Imports: 
     sf,
     graphics,
-    stats
+    stats,
+    DescTools,
+    tidyr,
+    trajr
 Suggests: 
     knitr,
     rmarkdown,
