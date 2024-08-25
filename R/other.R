@@ -38,27 +38,27 @@ similarity_polygon = function(p1, p2, plot = TRUE)
   p1_TA = as.data.frame(turning_angle(p1_coords))
   p2_TA = as.data.frame(turning_angle(p2_coords))
   
-  alpha = diff_auc(p2_TA$px, p1_TA$px, p2_TA$py, p1_TA$py, unequal = TRUE)
+  alpha = diff_auc(x1_vals = p2_TA$px, x2_vals = p1_TA$px, y1_vals = p2_TA$py, y2_vals = p1_TA$py, unequal = TRUE)
   
   min_config = list(dist = -1)
   
   all_points = list()
-  for(i in 1:nrow(p2_coords))   #g
+  for(i in 1:(nrow(p2_coords)-1))   #g
   {
     t_outer = p2_TA$px[i]
     p_outer = shifter(p2_coords, i - 1)
     
-    for(j in 1:nrow(p1_coords)) #f
+    for(j in 1:(nrow(p1_coords)-1)) #f
     {
       if(i == nrow(p2_coords) && j == nrow(p1_coords))
         break
       
       t_inner = p1_TA$px[j]
       t_net = t_outer - t_inner
-      if(t_net < 0)
-      {
-        t_net = 1 + t_net
-      }
+      # if(t_net < 0)
+      # {
+      #   t_net = 1 + t_net
+      # }
       p_inner = shifter(p1_coords, j - 1)
       
       theta_optimal = alpha - (2 * pi * t_net)
